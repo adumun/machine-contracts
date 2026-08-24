@@ -1,0 +1,75 @@
+{
+  "schema_version": "workflow-contract.v0.1.0",
+  "workflow_id": "WF-INITIATIVE-LIFECYCLE",
+  "name": "Initiative Lifecycle — S7 readiness excerpt",
+  "authority_state": "CANDIDATE",
+  "human_source": "STD-ILS-001 + REG-ILS-STAGE-CONTRACTS-001",
+  "stages": [
+    {
+      "stage_id": "S7",
+      "name": "Initiative Readiness & Delivery Planning",
+      "canonical_state": "READY_FOR_DELIVERY",
+      "dor": [
+        {
+          "rule_id": "S7-DOR-001",
+          "text": "G6 passed and problem/value/solution direction are sufficiently bounded.",
+          "evidence_required": true
+        },
+        {
+          "rule_id": "S7-DOR-002",
+          "text": "Owner, sponsor and operating expectations are known.",
+          "evidence_required": true
+        }
+      ],
+      "dod": [
+        {
+          "rule_id": "S7-DOD-001",
+          "text": "First delivery horizon is bounded, feasible and traceable to validated objectives.",
+          "evidence_required": true
+        },
+        {
+          "rule_id": "S7-DOD-002",
+          "text": "G7 decision authorizes or declines delivery commitment.",
+          "evidence_required": true
+        }
+      ],
+      "inputs": [
+        {
+          "artifact_id": "S7-IN-001",
+          "name": "Accepted outputs S0-S6",
+          "direction": "INPUT",
+          "requirement": "REQUIRED",
+          "evidence_required": true
+        }
+      ],
+      "outputs": [
+        {
+          "artifact_id": "S7-OUT-001",
+          "name": "Initiative delivery-readiness record",
+          "direction": "OUTPUT",
+          "requirement": "REQUIRED",
+          "evidence_required": true
+        },
+        {
+          "artifact_id": "S7-OUT-002",
+          "name": "Funding/resource approval",
+          "direction": "OUTPUT",
+          "requirement": "CONDITIONAL",
+          "condition": "Material funding or resource authorization is required by profile.",
+          "evidence_required": true
+        }
+      ],
+      "allowed_outcomes": ["PASS", "CONDITIONAL_PASS", "MORE_WORK", "PARK", "REJECT"]
+    }
+  ],
+  "transitions": [
+    {
+      "transition_id": "S7-TO-S8",
+      "source": "S7",
+      "target": "S8",
+      "trigger": "G7 PASS or CONDITIONAL_PASS with satisfied conditions",
+      "guards": ["S7 DoD PASS"],
+      "authority": "G7 decision record"
+    }
+  ]
+}
