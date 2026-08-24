@@ -1,0 +1,23 @@
+{
+  "schema_version": "workflow-contract.v0.1.0",
+  "workflow_id": "WF-INVALID-UNKNOWN-STAGE",
+  "name": "Invalid transition target fixture",
+  "authority_state": "CANDIDATE",
+  "stages": [
+    {
+      "stage_id": "S0",
+      "name": "Only stage",
+      "dor": [],
+      "dod": [],
+      "inputs": [],
+      "outputs": []
+    }
+  ],
+  "transitions": [
+    {
+      "transition_id": "T-INVALID-001",
+      "source": "S0",
+      "target": "S99"
+    }
+  ]
+}

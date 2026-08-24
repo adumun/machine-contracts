@@ -62,14 +62,5 @@
       "allowed_outcomes": ["PASS", "CONDITIONAL_PASS", "MORE_WORK", "PARK", "REJECT"]
     }
   ],
-  "transitions": [
-    {
-      "transition_id": "S7-TO-S8",
-      "source": "S7",
-      "target": "S8",
-      "trigger": "G7 PASS or CONDITIONAL_PASS with satisfied conditions",
-      "guards": ["S7 DoD PASS"],
-      "authority": "G7 decision record"
-    }
-  ]
+  "transitions": []
 }

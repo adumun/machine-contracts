@@ -12,11 +12,13 @@ This repository is the canonical version-control home for ADÜMÜN machine-reada
 6. Add or update valid and invalid fixtures with every material schema/semantic change.
 7. Validation must run locally. Hosted GitHub Actions are optional and must never be the only validation path.
 8. Generated projections are non-authoritative unless an explicit contract says otherwise.
+9. Do not accumulate dependent pull requests. If PR N is a prerequisite for PR N+1 in the same workstream, merge/close PR N before opening PR N+1 unless a documented stacked/parallel exception declares dependency, merge order and conflict handling.
 
 ## Branch / change discipline
 - `main` contains accepted repository state.
 - Material changes are developed on a branch and proposed through a PR.
 - Schema changes must include validation evidence in the PR description or repository evidence artifact.
+- Parallel PRs are acceptable only when they are truly independent or intentionally stacked with explicit dependency metadata.
 
 ## Initial normative sources
 - Enterprise Machine Contracts, Manifests, Relationships & Registries canon
@@ -25,3 +27,4 @@ This repository is the canonical version-control home for ADÜMÜN machine-reada
 - STD-WMS-TYPES-001 — Executable Work Type Specification
 - STD-ILS-001 — Initiative Lifecycle Standard — End-to-End States, Stages & Gates
 - STD-CIIA-001 — Canonical Initiative Information & Ingestion Architecture
+- STD-TOOL-001 — Tool Usage, Configuration, Integration & Template Governance (CANDIDATE)

@@ -1,0 +1,12 @@
+{
+  "schema_version": "work-item.v0.1.0",
+  "work_id": "WMS-INVALID-DONE-001",
+  "title": "Invalid DONE without evidence",
+  "type": "TASK",
+  "category": "ENGINEERING",
+  "areas": ["TESTING"],
+  "state": "DONE",
+  "owner": "team:machine-contracts",
+  "acceptance_criteria": ["Validator rejects missing completion evidence"],
+  "evidence_refs": []
+}
