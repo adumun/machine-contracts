@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.adumun.org/provider-config/provider-config.schema.json",
+  "title": "ADÜMÜN Provider Configuration Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "config_id", "provider", "binding_state", "mapping_ref", "target", "settings"],
+  "properties": {
+    "schema_version": {"const": "provider-config.v0.1.0"},
+    "config_id": {"type": "string", "minLength": 1},
+    "provider": {"type": "string", "minLength": 1},
+    "binding_state": {"enum": ["TEMPLATE", "CANDIDATE", "BOUND", "SUPERSEDED", "RETIRED"]},
+    "mapping_ref": {"type": "string", "minLength": 1},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": {"enum": ["REPOSITORY", "PROJECT"]},
+        "name": {"type": "string", "minLength": 1},
+        "external_id": {"type": ["string", "null"]},
+        "url": {"type": ["string", "null"]}
+      }
+    },
+    "settings": {"type": "object", "minProperties": 1},
+    "local_validation_required": {"type": "boolean"},
+    "hosted_validation_required": {"type": "boolean"},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}
