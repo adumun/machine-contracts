@@ -1,0 +1,15 @@
+schema_version: provider-config.v0.1.0
+config_id: CFG-INVALID-BOUND-001
+provider: jira
+binding_state: BOUND
+mapping_ref: MAP-WMS-JIRA-001
+target:
+  kind: PROJECT
+  name: Missing concrete Jira binding
+  external_id: null
+  url: null
+settings:
+  project_key: null
+local_validation_required: false
+hosted_validation_required: false
+notes: []

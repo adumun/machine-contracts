@@ -1,0 +1,31 @@
+schema_version: provider-config.v0.1.0
+config_id: CFG-JIRA-PROJECT-TEMPLATE-001
+provider: jira
+binding_state: TEMPLATE
+mapping_ref: MAP-WMS-JIRA-001
+target:
+  kind: PROJECT
+  name: UNBOUND_JIRA_PROJECT
+  external_id: null
+  url: null
+settings:
+  project_key: null
+  project_type: company_managed_or_team_managed_to_be_resolved
+  issue_type_bindings: {}
+  status_bindings: {}
+  transition_bindings: {}
+  field_bindings:
+    acceptance_criteria: null
+    category: null
+    areas: null
+    source: null
+    severity: null
+  dor_enforcement: policy_or_automation_to_be_resolved
+  dod_enforcement: policy_or_automation_to_be_resolved
+  mcp_adapter_allowed: true
+  mcp_semantic_authority: false
+local_validation_required: true
+hosted_validation_required: false
+notes:
+  - Populate actual Jira project key, IDs, fields, statuses and transitions only after reading the concrete Jira project configuration.
+  - Do not infer ADÜMÜN canonical semantics from Jira names alone; resolve every binding explicitly through MAP-WMS-JIRA-001.
