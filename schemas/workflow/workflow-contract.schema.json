@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.adumun.org/workflow/workflow-contract.schema.json",
+  "title": "ADÜMÜN Workflow Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "workflow_id", "name", "authority_state", "stages", "transitions"],
+  "properties": {
+    "schema_version": {"const": "workflow-contract.v0.1.0"},
+    "workflow_id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "authority_state": {"enum": ["DRAFT", "CANDIDATE", "CURRENT", "SUPERSEDED", "DEPRECATED", "HISTORICAL", "RETIRED"]},
+    "human_source": {"type": "string", "minLength": 1},
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/stage"}
+    },
+    "transitions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/transition"}
+    }
+  },
+  "$defs": {
+    "requirementClass": {"enum": ["REQUIRED", "CONDITIONAL", "RECOMMENDED", "REFERENCE", "DERIVED"]},
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "name", "direction", "requirement"],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "direction": {"enum": ["INPUT", "OUTPUT"]},
+        "requirement": {"$ref": "#/$defs/requirementClass"},
+        "condition": {"type": "string"},
+        "evidence_required": {"type": "boolean", "default": false}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"requirement": {"const": "CONDITIONAL"}}, "required": ["requirement"]},
+          "then": {"required": ["condition"]}
+        }
+      ]
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "text"],
+      "properties": {
+        "rule_id": {"type": "string", "minLength": 1},
+        "text": {"type": "string", "minLength": 1},
+        "applies_when": {"type": "string"},
+        "evidence_required": {"type": "boolean", "default": false}
+      }
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage_id", "name", "dor", "dod", "inputs", "outputs"],
+      "properties": {
+        "stage_id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "canonical_state": {"type": ["string", "null"]},
+        "dor": {"type": "array", "items": {"$ref": "#/$defs/rule"}},
+        "dod": {"type": "array", "items": {"$ref": "#/$defs/rule"}},
+        "inputs": {"type": "array", "items": {"$ref": "#/$defs/artifact"}},
+        "outputs": {"type": "array", "items": {"$ref": "#/$defs/artifact"}},
+        "allowed_outcomes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transition_id", "source", "target"],
+      "properties": {
+        "transition_id": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1},
+        "target": {"type": "string", "minLength": 1},
+        "trigger": {"type": "string"},
+        "guards": {"type": "array", "items": {"type": "string"}},
+        "authority": {"type": "string"},
+        "side_effects": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

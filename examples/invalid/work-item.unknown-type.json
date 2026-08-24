@@ -1,0 +1,9 @@
+{
+  "schema_version": "work-item.v0.1.0",
+  "work_id": "WMS-INVALID-001",
+  "title": "Invalid unknown type fixture",
+  "type": "FEATURE_REQUEST",
+  "category": "ENGINEERING",
+  "areas": ["BACKEND"],
+  "state": "READY"
+}

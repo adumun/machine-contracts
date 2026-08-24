@@ -1,0 +1,24 @@
+{
+  "schema_version": "work-item.v0.1.0",
+  "work_id": "WMS-EXAMPLE-001",
+  "title": "Add local validation evidence export",
+  "type": "TASK",
+  "category": "ENGINEERING",
+  "areas": ["TESTING", "DOCUMENTATION"],
+  "source": "INITIATIVE",
+  "priority": "P1",
+  "state": "READY",
+  "owner": "team:machine-contracts",
+  "acceptance_criteria": [
+    "Validation can run locally without GitHub Actions",
+    "Validation result can be retained as evidence"
+  ],
+  "evidence_refs": [],
+  "provider_refs": [
+    {
+      "provider": "github",
+      "external_id": "issue:1",
+      "project": "adumun/machine-contracts"
+    }
+  ]
+}
