@@ -1,0 +1,24 @@
+{
+  "schema_version": "workflow-contract.v0.1.0",
+  "workflow_id": "WF-INVALID-CONDITIONAL",
+  "name": "Invalid conditional artifact fixture",
+  "authority_state": "CANDIDATE",
+  "stages": [
+    {
+      "stage_id": "S0",
+      "name": "Only stage",
+      "dor": [],
+      "dod": [],
+      "inputs": [],
+      "outputs": [
+        {
+          "artifact_id": "A-001",
+          "name": "Conditional output",
+          "direction": "OUTPUT",
+          "requirement": "CONDITIONAL"
+        }
+      ]
+    }
+  ],
+  "transitions": []
+}
