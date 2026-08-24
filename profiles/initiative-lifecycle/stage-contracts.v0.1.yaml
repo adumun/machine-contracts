@@ -1,0 +1,179 @@
+schema_version: workflow-contract.v0.1.0
+workflow_id: WF-INITIATIVE-LIFECYCLE
+authority_state: CANDIDATE
+name: Initiative Lifecycle — S0-S12 stage contracts
+human_source: STD-ILS-001 + REG-ILS-STAGE-CONTRACTS-001
+stages:
+  - stage_id: S0
+    name: Intake & Idea Capture
+    canonical_state: CAPTURED
+    dor:
+      - {rule_id: S0-DOR-001, text: A need, idea, request or opportunity is identifiable.}
+    dod:
+      - {rule_id: S0-DOD-001, text: G0 records whether the object is worth discovery.}
+    inputs:
+      - {artifact_id: S0-IN-001, name: Idea or need statement, direction: INPUT, requirement: REQUIRED}
+    outputs:
+      - {artifact_id: S0-OUT-001, name: Intake record and G0 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [EXPLORE, PARK, REJECT, MERGE_WITH_EXISTING]
+  - stage_id: S1
+    name: Problem Discovery
+    canonical_state: DISCOVERING
+    dor:
+      - {rule_id: S1-DOR-001, text: G0 permits discovery and the problem context is identifiable.}
+    dod:
+      - {rule_id: S1-DOD-001, text: Actors, context and problem materiality support a G1 decision.}
+    inputs:
+      - {artifact_id: S1-IN-001, name: Accepted intake record, direction: INPUT, requirement: REQUIRED}
+    outputs:
+      - {artifact_id: S1-OUT-001, name: Problem discovery evidence and G1 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [CONTINUE, MORE_DISCOVERY, PARK, REJECT]
+  - stage_id: S2
+    name: Market, Alternatives & Context Discovery
+    canonical_state: DISCOVERING
+    dor:
+      - {rule_id: S2-DOR-001, text: G1 supports continued investigation.}
+    dod:
+      - {rule_id: S2-DOD-001, text: Alternatives and unmet need are sufficiently understood for G2.}
+    inputs:
+      - {artifact_id: S2-IN-001, name: Problem discovery outputs, direction: INPUT, requirement: REQUIRED}
+    outputs:
+      - {artifact_id: S2-OUT-001, name: Alternatives/context evidence and G2 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [BUILD_CANDIDATE, BUY_OR_ADOPT, INTEGRATE, PARTNER, PARK, REJECT]
+  - stage_id: S3
+    name: Strategic Framing & Value Proposition
+    canonical_state: DISCOVERING
+    dor:
+      - {rule_id: S3-DOR-001, text: G2 leaves a meaningful unmet or poorly met need.}
+    dod:
+      - {rule_id: S3-DOD-001, text: Strategic fit, actors, value, differentiation and success signals support G3.}
+    inputs:
+      - {artifact_id: S3-IN-001, name: Problem and alternatives evidence, direction: INPUT, requirement: REQUIRED}
+    outputs:
+      - {artifact_id: S3-OUT-001, name: Strategic framing and G3 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [CONTINUE, REFRAME, PARK, REJECT]
+  - stage_id: S4
+    name: Hypothesis Design & Validation
+    canonical_state: VALIDATING
+    dor:
+      - {rule_id: S4-DOR-001, text: Material assumptions can be expressed as testable hypotheses.}
+    dod:
+      - {rule_id: S4-DOD-001, text: Evidence is sufficient for a G4 investment decision.}
+    inputs:
+      - {artifact_id: S4-IN-001, name: Strategic framing and material assumptions, direction: INPUT, requirement: REQUIRED}
+    outputs:
+      - {artifact_id: S4-OUT-001, name: Hypotheses, validation evidence and G4 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [CONFIRMED_ENOUGH_TO_CONTINUE, GATHER_MORE_EVIDENCE, PIVOT, PARK, REJECT]
+  - stage_id: S5
+    name: Product / Service Discovery
+    canonical_state: QUALIFIED
+    dor:
+      - {rule_id: S5-DOR-001, text: G4 supports further investment.}
+    dod:
+      - {rule_id: S5-DOD-001, text: Outcomes, workflows, boundaries and success measures are sufficiently defined for G5.}
+    inputs:
+      - {artifact_id: S5-IN-001, name: Accepted validation evidence and value proposition, direction: INPUT, requirement: REQUIRED}
+    outputs:
+      - {artifact_id: S5-OUT-001, name: Product or service discovery package and G5 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [CONTINUE, REFINE, PARK, REJECT]
+  - stage_id: S6
+    name: Solution Discovery & Feasibility
+    canonical_state: DEFINING
+    dor:
+      - {rule_id: S6-DOR-001, text: G5 establishes sufficiently bounded intended value and outcomes.}
+    dod:
+      - {rule_id: S6-DOD-001, text: A feasible and sustainable direction is supported for G6.}
+    inputs:
+      - {artifact_id: S6-IN-001, name: Product/service discovery outputs, direction: INPUT, requirement: REQUIRED}
+    outputs:
+      - {artifact_id: S6-OUT-001, name: Feasibility package and G6 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+      - {artifact_id: S6-OUT-002, name: Material ADRs, direction: OUTPUT, requirement: CONDITIONAL, condition: Material architecture decisions are required., evidence_required: true}
+    allowed_outcomes: [CONTINUE, REWORK, PARK, REJECT]
+  - stage_id: S7
+    name: Initiative Readiness & Delivery Planning
+    canonical_state: READY_FOR_DELIVERY
+    dor:
+      - {rule_id: S7-DOR-001, text: G6 passed and problem/value/solution direction are sufficiently bounded., evidence_required: true}
+      - {rule_id: S7-DOR-002, text: Owner, sponsor and operating expectations are known., evidence_required: true}
+    dod:
+      - {rule_id: S7-DOD-001, text: First delivery horizon is bounded, feasible and traceable to validated objectives., evidence_required: true}
+      - {rule_id: S7-DOD-002, text: G7 authorizes or declines delivery commitment., evidence_required: true}
+    inputs:
+      - {artifact_id: S7-IN-001, name: Accepted outputs S0-S6, direction: INPUT, requirement: REQUIRED, evidence_required: true}
+    outputs:
+      - {artifact_id: S7-OUT-001, name: Initiative delivery-readiness record, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+      - {artifact_id: S7-OUT-002, name: Funding/resource approval, direction: OUTPUT, requirement: CONDITIONAL, condition: Material funding or resource authorization is required by profile., evidence_required: true}
+    allowed_outcomes: [PASS, CONDITIONAL_PASS, MORE_WORK, PARK, REJECT]
+  - stage_id: S8
+    name: Delivery & Continuous Validation
+    canonical_state: DELIVERING
+    dor:
+      - {rule_id: S8-DOR-001, text: G7 authorizes delivery and executable work is ready under WMS.}
+    dod:
+      - {rule_id: S8-DOD-001, text: The intended increment satisfies release-readiness evidence for G8.}
+    inputs:
+      - {artifact_id: S8-IN-001, name: G7 decision and delivery plan, direction: INPUT, requirement: REQUIRED, evidence_required: true}
+    outputs:
+      - {artifact_id: S8-OUT-001, name: Working increment and G8 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [RELEASE_CANDIDATE, CONTINUE_DELIVERY, REMEDIATE, PARK]
+  - stage_id: S9
+    name: Release & Adoption
+    canonical_state: RELEASE_CANDIDATE
+    dor:
+      - {rule_id: S9-DOR-001, text: G8 confirms release readiness for the intended operating context.}
+    dod:
+      - {rule_id: S9-DOD-001, text: Release acceptance/adoption evidence supports the G9 operating decision.}
+    inputs:
+      - {artifact_id: S9-IN-001, name: Release candidate and G8 evidence, direction: INPUT, requirement: REQUIRED, evidence_required: true}
+    outputs:
+      - {artifact_id: S9-OUT-001, name: Release/adoption evidence and G9 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [OPERATE, ROLLBACK, REMEDIATE, LIMITED_ROLLOUT, PARK]
+  - stage_id: S10
+    name: Operation, Support, Maintenance & Warranty
+    canonical_state: OPERATING
+    dor:
+      - {rule_id: S10-DOR-001, text: G9 accepts the capability into operation.}
+    dod:
+      - {rule_id: S10-DOD-001, text: G10 records whether to continue, evolve, remediate, park or retire.}
+    inputs:
+      - {artifact_id: S10-IN-001, name: Accepted operating release and service ownership, direction: INPUT, requirement: REQUIRED}
+    outputs:
+      - {artifact_id: S10-OUT-001, name: Operational evidence and G10 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [CONTINUE, EVOLVE, REMEDIATE, PARK, RETIRE]
+  - stage_id: S11
+    name: Evolution
+    canonical_state: EVOLVING
+    dor:
+      - {rule_id: S11-DOR-001, text: A material new opportunity exists over an operating initiative.}
+    dod:
+      - {rule_id: S11-DOD-001, text: G11 determines the earliest lifecycle stage containing material uncertainty.}
+    inputs:
+      - {artifact_id: S11-IN-001, name: Operating evidence and evolution opportunity, direction: INPUT, requirement: REQUIRED}
+    outputs:
+      - {artifact_id: S11-OUT-001, name: Evolution framing and G11 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [REENTER_DISCOVERY, REENTER_VALIDATION, DEFINE, DELIVER, PARK, REJECT]
+  - stage_id: S12
+    name: Retirement
+    canonical_state: RETIRING
+    dor:
+      - {rule_id: S12-DOR-001, text: A retirement decision exists and applicable decommissioning obligations are known.}
+    dod:
+      - {rule_id: S12-DOD-001, text: Applicable decommissioning obligations are complete and G12 permits RETIRED.}
+    inputs:
+      - {artifact_id: S12-IN-001, name: Retirement decision and decommissioning obligations, direction: INPUT, requirement: REQUIRED, evidence_required: true}
+    outputs:
+      - {artifact_id: S12-OUT-001, name: Retirement evidence and G12 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+    allowed_outcomes: [RETIRED, REMEDIATION_REQUIRED]
+transitions:
+  - {transition_id: S0-TO-S1, source: S0, target: S1, trigger: G0 EXPLORE, guards: [S0 DoD PASS]}
+  - {transition_id: S1-TO-S2, source: S1, target: S2, trigger: G1 CONTINUE, guards: [S1 DoD PASS]}
+  - {transition_id: S2-TO-S3, source: S2, target: S3, trigger: G2 BUILD_CANDIDATE, guards: [S2 DoD PASS]}
+  - {transition_id: S3-TO-S4, source: S3, target: S4, trigger: G3 CONTINUE, guards: [S3 DoD PASS]}
+  - {transition_id: S4-TO-S5, source: S4, target: S5, trigger: G4 CONFIRMED_ENOUGH_TO_CONTINUE, guards: [S4 DoD PASS]}
+  - {transition_id: S5-TO-S6, source: S5, target: S6, trigger: G5 CONTINUE, guards: [S5 DoD PASS]}
+  - {transition_id: S6-TO-S7, source: S6, target: S7, trigger: G6 CONTINUE, guards: [S6 DoD PASS]}
+  - {transition_id: S7-TO-S8, source: S7, target: S8, trigger: G7 PASS, guards: [S7 DoD PASS]}
+  - {transition_id: S8-TO-S9, source: S8, target: S9, trigger: G8 RELEASE_CANDIDATE, guards: [S8 DoD PASS]}
+  - {transition_id: S9-TO-S10, source: S9, target: S10, trigger: G9 OPERATE, guards: [S9 DoD PASS]}
+  - {transition_id: S10-TO-S11, source: S10, target: S11, trigger: G10 EVOLVE, guards: [S10 DoD PASS]}
+  - {transition_id: S10-TO-S12, source: S10, target: S12, trigger: G10 RETIRE, guards: [S10 DoD PASS]}
