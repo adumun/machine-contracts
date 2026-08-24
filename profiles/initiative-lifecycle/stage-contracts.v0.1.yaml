@@ -8,7 +8,7 @@ stages:
     name: Intake & Idea Capture
     canonical_state: CAPTURED
     dor:
-      - {rule_id: S0-DOR-001, text: A need, idea, request or opportunity is identifiable.}
+      - {rule_id: S0-DOR-001, text: "A need, idea, request or opportunity is identifiable."}
     dod:
       - {rule_id: S0-DOD-001, text: G0 records whether the object is worth discovery.}
     inputs:
@@ -22,7 +22,7 @@ stages:
     dor:
       - {rule_id: S1-DOR-001, text: G0 permits discovery and the problem context is identifiable.}
     dod:
-      - {rule_id: S1-DOD-001, text: Actors, context and problem materiality support a G1 decision.}
+      - {rule_id: S1-DOD-001, text: "Actors, context and problem materiality support a G1 decision."}
     inputs:
       - {artifact_id: S1-IN-001, name: Accepted intake record, direction: INPUT, requirement: REQUIRED}
     outputs:
@@ -46,7 +46,7 @@ stages:
     dor:
       - {rule_id: S3-DOR-001, text: G2 leaves a meaningful unmet or poorly met need.}
     dod:
-      - {rule_id: S3-DOD-001, text: Strategic fit, actors, value, differentiation and success signals support G3.}
+      - {rule_id: S3-DOD-001, text: "Strategic fit, actors, value, differentiation and success signals support G3."}
     inputs:
       - {artifact_id: S3-IN-001, name: Problem and alternatives evidence, direction: INPUT, requirement: REQUIRED}
     outputs:
@@ -62,7 +62,7 @@ stages:
     inputs:
       - {artifact_id: S4-IN-001, name: Strategic framing and material assumptions, direction: INPUT, requirement: REQUIRED}
     outputs:
-      - {artifact_id: S4-OUT-001, name: Hypotheses, validation evidence and G4 decision, direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
+      - {artifact_id: S4-OUT-001, name: "Hypotheses, validation evidence and G4 decision", direction: OUTPUT, requirement: REQUIRED, evidence_required: true}
     allowed_outcomes: [CONFIRMED_ENOUGH_TO_CONTINUE, GATHER_MORE_EVIDENCE, PIVOT, PARK, REJECT]
   - stage_id: S5
     name: Product / Service Discovery
@@ -70,7 +70,7 @@ stages:
     dor:
       - {rule_id: S5-DOR-001, text: G4 supports further investment.}
     dod:
-      - {rule_id: S5-DOD-001, text: Outcomes, workflows, boundaries and success measures are sufficiently defined for G5.}
+      - {rule_id: S5-DOD-001, text: "Outcomes, workflows, boundaries and success measures are sufficiently defined for G5."}
     inputs:
       - {artifact_id: S5-IN-001, name: Accepted validation evidence and value proposition, direction: INPUT, requirement: REQUIRED}
     outputs:
@@ -94,9 +94,9 @@ stages:
     canonical_state: READY_FOR_DELIVERY
     dor:
       - {rule_id: S7-DOR-001, text: G6 passed and problem/value/solution direction are sufficiently bounded., evidence_required: true}
-      - {rule_id: S7-DOR-002, text: Owner, sponsor and operating expectations are known., evidence_required: true}
+      - {rule_id: S7-DOR-002, text: "Owner, sponsor and operating expectations are known.", evidence_required: true}
     dod:
-      - {rule_id: S7-DOD-001, text: First delivery horizon is bounded, feasible and traceable to validated objectives., evidence_required: true}
+      - {rule_id: S7-DOD-001, text: "First delivery horizon is bounded, feasible and traceable to validated objectives.", evidence_required: true}
       - {rule_id: S7-DOD-002, text: G7 authorizes or declines delivery commitment., evidence_required: true}
     inputs:
       - {artifact_id: S7-IN-001, name: Accepted outputs S0-S6, direction: INPUT, requirement: REQUIRED, evidence_required: true}
@@ -134,7 +134,7 @@ stages:
     dor:
       - {rule_id: S10-DOR-001, text: G9 accepts the capability into operation.}
     dod:
-      - {rule_id: S10-DOD-001, text: G10 records whether to continue, evolve, remediate, park or retire.}
+      - {rule_id: S10-DOD-001, text: "G10 records whether to continue, evolve, remediate, park or retire."}
     inputs:
       - {artifact_id: S10-IN-001, name: Accepted operating release and service ownership, direction: INPUT, requirement: REQUIRED}
     outputs:
