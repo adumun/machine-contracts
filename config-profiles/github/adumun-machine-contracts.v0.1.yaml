@@ -6,7 +6,7 @@ mapping_ref: MAP-WMS-GITHUB-001
 target:
   kind: REPOSITORY
   name: adumun/machine-contracts
-  external_id: "1344822698"
+  external_id: "1344824664"
   url: https://github.com/adumun/machine-contracts
 settings:
   default_branch: main
