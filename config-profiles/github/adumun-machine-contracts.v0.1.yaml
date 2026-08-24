@@ -1,0 +1,24 @@
+schema_version: provider-config.v0.1.0
+config_id: CFG-GITHUB-ADUMUN-MACHINE-CONTRACTS-001
+provider: github
+binding_state: BOUND
+mapping_ref: MAP-WMS-GITHUB-001
+target:
+  kind: REPOSITORY
+  name: adumun/machine-contracts
+  external_id: "1344822698"
+  url: https://github.com/adumun/machine-contracts
+settings:
+  default_branch: main
+  pull_request_required_for_material_changes: true
+  dependent_pr_accumulation_allowed: false
+  preferred_merge_method: squash
+  direct_push_policy: emergency_only_with_reconciliation
+  local_validation_required: true
+  github_actions_required: false
+  provider_status_checks_may_be_absent_under_financial_bypass: true
+  canonical_semantics_source: ADUMUN_MACHINE_CONTRACTS_AND_HUMAN_STANDARDS
+local_validation_required: true
+hosted_validation_required: false
+notes:
+  - This profile records the intended governed configuration. Provider-side enforcement settings must be audited separately because repository policy remains normative even when a provider rule is unavailable or not yet configured.
