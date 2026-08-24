@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.adumun.org/provider-mapping/provider-mapping.schema.json",
+  "title": "ADÜMÜN Provider Mapping Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "mapping_id", "provider", "authority_state", "work_type_mappings", "state_mappings", "field_mappings"],
+  "properties": {
+    "schema_version": {"const": "provider-mapping.v0.1.0"},
+    "mapping_id": {"type": "string", "minLength": 1},
+    "provider": {"type": "string", "minLength": 1},
+    "authority_state": {"enum": ["DRAFT", "CANDIDATE", "CURRENT", "SUPERSEDED", "DEPRECATED", "HISTORICAL", "RETIRED"]},
+    "canonical_model": {"type": "string", "const": "work-item.v0.1.0"},
+    "work_type_mappings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/valueMapping"}
+    },
+    "state_mappings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/valueMapping"}
+    },
+    "field_mappings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/fieldMapping"}
+    },
+    "transition_mappings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/transitionMapping"}
+    },
+    "unsupported_provider_values": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "declared_exceptions": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "valueMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical", "provider"],
+      "properties": {
+        "canonical": {"type": "string", "minLength": 1},
+        "provider": {"type": "string", "minLength": 1},
+        "direction": {"enum": ["BIDIRECTIONAL", "TO_PROVIDER", "FROM_PROVIDER"], "default": "BIDIRECTIONAL"},
+        "lossy": {"type": "boolean", "default": false},
+        "notes": {"type": "string"}
+      }
+    },
+    "fieldMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_field", "provider_field", "direction"],
+      "properties": {
+        "canonical_field": {"type": "string", "minLength": 1},
+        "provider_field": {"type": "string", "minLength": 1},
+        "direction": {"enum": ["BIDIRECTIONAL", "TO_PROVIDER", "FROM_PROVIDER"]},
+        "required_for_sync": {"type": "boolean", "default": false},
+        "transform": {"type": ["string", "null"]},
+        "notes": {"type": "string"}
+      }
+    },
+    "transitionMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_from", "canonical_to", "provider_transition"],
+      "properties": {
+        "canonical_from": {"type": "string", "minLength": 1},
+        "canonical_to": {"type": "string", "minLength": 1},
+        "provider_transition": {"type": "string", "minLength": 1},
+        "guards_preserved": {"type": "boolean"},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}
