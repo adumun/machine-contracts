@@ -1,0 +1,36 @@
+schema_version: provider-mapping.v0.1.0
+mapping_id: MAP-WMS-GITHUB-001
+provider: github
+authority_state: CANDIDATE
+canonical_model: work-item.v0.1.0
+work_type_mappings:
+  - {canonical: STORY, provider: issue:type:story, direction: BIDIRECTIONAL}
+  - {canonical: BUG, provider: issue:type:bug, direction: BIDIRECTIONAL}
+  - {canonical: TASK, provider: issue:type:task, direction: BIDIRECTIONAL}
+  - {canonical: SPIKE, provider: issue:type:spike, direction: BIDIRECTIONAL}
+  - {canonical: EXPERIMENT, provider: issue:type:experiment, direction: BIDIRECTIONAL}
+  - {canonical: TECHNICAL_DEBT, provider: issue:type:technical-debt, direction: BIDIRECTIONAL}
+  - {canonical: INCIDENT, provider: issue:type:incident, direction: BIDIRECTIONAL}
+state_mappings:
+  - {canonical: PROPOSED, provider: status:proposed, direction: BIDIRECTIONAL}
+  - {canonical: REFINING, provider: status:refining, direction: BIDIRECTIONAL}
+  - {canonical: READY, provider: status:ready, direction: BIDIRECTIONAL}
+  - {canonical: IN_PROGRESS, provider: status:in-progress, direction: BIDIRECTIONAL}
+  - {canonical: BLOCKED, provider: status:blocked, direction: BIDIRECTIONAL}
+  - {canonical: IN_REVIEW, provider: status:in-review, direction: BIDIRECTIONAL}
+  - {canonical: DONE, provider: status:done, direction: BIDIRECTIONAL}
+  - {canonical: CANCELED, provider: status:canceled, direction: BIDIRECTIONAL}
+  - {canonical: DEFERRED, provider: status:deferred, direction: BIDIRECTIONAL}
+field_mappings:
+  - {canonical_field: work_id, provider_field: issue.id, direction: FROM_PROVIDER, required_for_sync: true}
+  - {canonical_field: title, provider_field: issue.title, direction: BIDIRECTIONAL, required_for_sync: true}
+  - {canonical_field: owner, provider_field: issue.assignees, direction: BIDIRECTIONAL}
+  - {canonical_field: acceptance_criteria, provider_field: issue.body.acceptance_criteria, direction: BIDIRECTIONAL}
+  - {canonical_field: provider_refs, provider_field: issue.url, direction: FROM_PROVIDER}
+transition_mappings:
+  - {canonical_from: READY, canonical_to: IN_PROGRESS, provider_transition: project.status.ready->in-progress, guards_preserved: true}
+  - {canonical_from: IN_PROGRESS, canonical_to: IN_REVIEW, provider_transition: project.status.in-progress->in-review, guards_preserved: true}
+  - {canonical_from: IN_REVIEW, canonical_to: DONE, provider_transition: project.status.in-review->done, guards_preserved: true}
+unsupported_provider_values: []
+declared_exceptions:
+  - GitHub labels/projects are implementation surfaces; canonical semantics remain in ADÜMÜN mappings and contracts.

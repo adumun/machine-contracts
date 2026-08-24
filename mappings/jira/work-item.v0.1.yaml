@@ -1,0 +1,38 @@
+schema_version: provider-mapping.v0.1.0
+mapping_id: MAP-WMS-JIRA-001
+provider: jira
+authority_state: CANDIDATE
+canonical_model: work-item.v0.1.0
+work_type_mappings:
+  - {canonical: STORY, provider: Story, direction: BIDIRECTIONAL}
+  - {canonical: BUG, provider: Bug, direction: BIDIRECTIONAL}
+  - {canonical: TASK, provider: Task, direction: BIDIRECTIONAL}
+  - {canonical: SPIKE, provider: Spike, direction: BIDIRECTIONAL}
+  - {canonical: EXPERIMENT, provider: Experiment, direction: BIDIRECTIONAL}
+  - {canonical: TECHNICAL_DEBT, provider: Technical Debt, direction: BIDIRECTIONAL}
+  - {canonical: INCIDENT, provider: Incident, direction: BIDIRECTIONAL}
+state_mappings:
+  - {canonical: PROPOSED, provider: Proposed, direction: BIDIRECTIONAL}
+  - {canonical: REFINING, provider: Refining, direction: BIDIRECTIONAL}
+  - {canonical: READY, provider: Ready, direction: BIDIRECTIONAL}
+  - {canonical: IN_PROGRESS, provider: In Progress, direction: BIDIRECTIONAL}
+  - {canonical: BLOCKED, provider: Blocked, direction: BIDIRECTIONAL}
+  - {canonical: IN_REVIEW, provider: In Review, direction: BIDIRECTIONAL}
+  - {canonical: DONE, provider: Done, direction: BIDIRECTIONAL}
+  - {canonical: CANCELED, provider: Canceled, direction: BIDIRECTIONAL}
+  - {canonical: DEFERRED, provider: Deferred, direction: BIDIRECTIONAL}
+field_mappings:
+  - {canonical_field: work_id, provider_field: key, direction: FROM_PROVIDER, required_for_sync: true}
+  - {canonical_field: title, provider_field: summary, direction: BIDIRECTIONAL, required_for_sync: true}
+  - {canonical_field: owner, provider_field: assignee, direction: BIDIRECTIONAL}
+  - {canonical_field: acceptance_criteria, provider_field: customfield.acceptance_criteria, direction: BIDIRECTIONAL}
+  - {canonical_field: priority, provider_field: priority, direction: BIDIRECTIONAL}
+  - {canonical_field: provider_refs, provider_field: self, direction: FROM_PROVIDER}
+transition_mappings:
+  - {canonical_from: READY, canonical_to: IN_PROGRESS, provider_transition: Start Progress, guards_preserved: true}
+  - {canonical_from: IN_PROGRESS, canonical_to: IN_REVIEW, provider_transition: Submit for Review, guards_preserved: true}
+  - {canonical_from: IN_REVIEW, canonical_to: DONE, provider_transition: Complete, guards_preserved: true}
+unsupported_provider_values: []
+declared_exceptions:
+  - Jira field IDs and workflow names vary by project and MUST be resolved by a project-specific configuration profile.
+  - Jira/MCP is an adapter/transport surface and MUST NOT infer canonical ADÜMÜN semantics from provider names alone.

@@ -1,0 +1,16 @@
+schema_version: provider-mapping.v0.1.0
+mapping_id: MAP-INVALID-001
+provider: jira
+authority_state: CANDIDATE
+canonical_model: work-item.v0.1.0
+work_type_mappings:
+  - {canonical: FEATURE_REQUEST, provider: Story, direction: BIDIRECTIONAL}
+state_mappings:
+  - {canonical: READY, provider: Ready, direction: BIDIRECTIONAL}
+  - {canonical: READY, provider: To Do, direction: BIDIRECTIONAL}
+field_mappings:
+  - {canonical_field: provider_status, provider_field: status, direction: FROM_PROVIDER}
+transition_mappings:
+  - {canonical_from: READY, canonical_to: DONE, provider_transition: Complete, guards_preserved: false}
+unsupported_provider_values: []
+declared_exceptions: []
