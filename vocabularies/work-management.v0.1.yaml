@@ -1,0 +1,76 @@
+schema_version: work-management-vocabularies.v0.1.0
+status: CANDIDATE
+work_types:
+  - STORY
+  - BUG
+  - TASK
+  - SPIKE
+  - EXPERIMENT
+  - TECHNICAL_DEBT
+  - INCIDENT
+categories:
+  - PRODUCT
+  - ENGINEERING
+  - ARCHITECTURE
+  - DATA
+  - SECURITY
+  - INFRASTRUCTURE
+  - QUALITY
+  - DOCUMENTATION
+  - OPERATIONS
+  - COMPLIANCE
+  - DESIGN
+  - RESEARCH
+areas:
+  baseline:
+    - API
+    - BACKEND
+    - FRONTEND
+    - MOBILE
+    - DATABASE
+    - DATA
+    - SECURITY
+    - IDENTITY
+    - INFRASTRUCTURE
+    - DEPLOYMENT
+    - OBSERVABILITY
+    - PERFORMANCE
+    - TESTING
+    - DOCUMENTATION
+    - UX
+    - PRODUCT
+    - OPERATIONS
+    - COMPLIANCE
+  extension_policy: namespaced_values_allowed
+sources:
+  - STRATEGY
+  - INITIATIVE
+  - USER
+  - CLIENT
+  - INCIDENT
+  - AUDIT
+  - RISK
+  - MAINTENANCE
+  - TECHNICAL_DISCOVERY
+  - EXTERNAL_REQUIREMENT
+priorities:
+  - P0
+  - P1
+  - P2
+  - P3
+severities:
+  - SEV0
+  - SEV1
+  - SEV2
+  - SEV3
+  - SEV4
+workflow_states:
+  - PROPOSED
+  - REFINING
+  - READY
+  - IN_PROGRESS
+  - BLOCKED
+  - IN_REVIEW
+  - DONE
+  - CANCELED
+  - DEFERRED
