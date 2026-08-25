@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.adumun.org/contracts/contract-authority-index.schema.json",
+  "title": "ADUMUN Contract Authority Index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["registryVersion", "schemaVersion", "status", "contracts"],
+  "properties": {
+    "registryVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "schemaVersion": {"const": "1.0.0"},
+    "status": {"enum": ["CANDIDATE", "CURRENT", "SUPERSEDED"]},
+    "contracts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "authorityState", "semanticAuthority", "status", "provenance"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "name": {"type": "string", "minLength": 1},
+          "version": {"type": ["string", "null"]},
+          "authorityState": {"enum": ["ADUMUN_CANONICAL", "EXTERNAL_LEGACY", "DISTRIBUTED", "RECONCILIATION_REQUIRED", "SUPERSEDED"]},
+          "semanticAuthority": {"type": "string", "minLength": 1},
+          "status": {"enum": ["ACTIVE", "CANDIDATE", "RECONCILIATION_REQUIRED", "DEPRECATED", "SUPERSEDED"]},
+          "successorRef": {"type": ["string", "null"]},
+          "notes": {"type": "string"},
+          "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["evidenceStatus", "observedAt", "sourceRefs"],
+            "properties": {
+              "evidenceStatus": {"enum": ["CONFIRMED", "EVIDENCED", "INFERRED", "PROVISIONAL", "UNKNOWN"]},
+              "observedAt": {"type": "string", "format": "date"},
+              "sourceRefs": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+              "confidence": {"enum": ["HIGH", "MEDIUM", "LOW", "UNKNOWN"]}
+            }
+          }
+        }
+      }
+    }
+  }
+}
