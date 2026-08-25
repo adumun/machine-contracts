@@ -1,0 +1,20 @@
+{
+  "schema_version": "initiative-manifest.v1",
+  "contract_version": "1.0.0",
+  "initiative": {"id":"auto-ig-posting","short_id":"AIG","name":"Auto IG Posting","repository":"cmartinezs/auto-ig-posting"},
+  "profile": {"primary":"PRODUCT_SAAS","rigor":"L2_STANDARD","modifiers":["CLIENT_FACING","PERSONAL_DATA","PUBLIC_INTERNET","EXTERNAL_PLATFORM_DEPENDENCIES","LOCAL_DESKTOP_AND_CLOUD_RUNTIME"]},
+  "adoption": {"mode":"RETROSPECTIVE_ADOPTION","adopted_at":"2026-08-18T01:29:00-04:00","reason":"Initiative predates canonical lifecycle governance.","historical_gate_policy":"EVIDENCE_BACKED_RECONSTRUCTION_ONLY"},
+  "lifecycle": {"state":"DELIVERING","canonical_state":null,"current_stage":"LEGACY_DELIVERY","current_stage_name":"Operational delivery under retrospective ILS adoption","current_gate":"G7_RETROSPECTIVE_REVIEW","last_accepted_gate":null,"gate_history_complete":false,"reconciliation_status":"RECONCILIATION_REQUIRED"},
+  "registries": [
+    {"registry_type":"SOURCES","ref":"./sources.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"GATES","ref":"./gates.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"ARTIFACTS","ref":"./artifacts.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"EVIDENCE","ref":"./evidence.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"HYPOTHESES","ref":"./hypotheses.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"RISKS","ref":"./risks.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"DECISIONS","ref":"./decisions.yaml","authority_scope":"INITIATIVE_LOCAL","required":true}
+  ],
+  "projection_policy": {"canonical_format":"YAML","generated_files_are_authoritative":false,"generated_json":"../generated/initiative.json"},
+  "extensions": {"legacy.constraints":{"existing_delivery_may_continue":true}},
+  "updated_at":"2026-08-18T01:29:00-04:00"
+}
