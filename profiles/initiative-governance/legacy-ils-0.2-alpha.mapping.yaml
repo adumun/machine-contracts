@@ -1,0 +1,38 @@
+mapping_id: MAP-IGM-LEGACY-ILS-0.2-ALPHA
+status: CURRENT_COMPATIBILITY_PROFILE
+source_schema_version: 0.2-alpha
+target_schema_version: initiative-manifest.v1
+preserves_identity: true
+preserves_local_authority: true
+field_mapping:
+  initiative: initiative
+  profile.primary: profile.primary
+  profile.rigor: profile.rigor
+  profile.modifiers: profile.modifiers
+  adoption: adoption
+  lifecycle.state: lifecycle.state
+  lifecycle.current_stage: lifecycle.current_stage
+  lifecycle.current_stage_name: lifecycle.current_stage_name
+  lifecycle.current_gate: lifecycle.current_gate
+  lifecycle.last_accepted_gate: lifecycle.last_accepted_gate
+  lifecycle.last_gate_decision_record: lifecycle.last_gate_decision_record
+  lifecycle.gate_history_complete: lifecycle.gate_history_complete
+  projection_policy: projection_policy
+  updated_at: updated_at
+registry_mapping:
+  sources: SOURCES
+  gates: GATES
+  artifacts: ARTIFACTS
+  evidence: EVIDENCE
+  hypotheses: HYPOTHESES
+  risks: RISKS
+  decisions: DECISIONS
+local_extension_mapping:
+  commercial_context: domain.commercial_context
+  canon: domain.canon
+  constraints: local.constraints
+  next_actions: local.next_actions
+notes:
+  - Unknown source registry keys are preserved as INITIATIVE_LOCAL registry references using an uppercase normalized registry_type.
+  - Source-only fields are never promoted to enterprise semantics by projection.
+  - Retrospective lifecycle values remain visible in lifecycle.state while canonical_state stays null until evidence-backed reconciliation exists.

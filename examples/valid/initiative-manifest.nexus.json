@@ -1,0 +1,20 @@
+{
+  "schema_version": "initiative-manifest.v1",
+  "contract_version": "1.0.0",
+  "initiative": {"id":"nexus-community-ecosystem","short_id":"NCS","name":"Nexus Community Ecosystem","repository":"cmartinezs/nexus-community-ecosystem"},
+  "profile": {"primary":"PRODUCT_SAAS","rigor":"L2_STANDARD","modifiers":["CLIENT_FACING","PERSONAL_DATA","PUBLIC_INTERNET_PROBABLE"]},
+  "lifecycle": {"state":"DISCOVERING","canonical_state":null,"current_stage":"S1","current_stage_name":"Problem Discovery","current_gate":"G1","last_accepted_gate":"G0","reconciliation_status":"CURRENT"},
+  "registries": [
+    {"registry_type":"SOURCES","ref":"./sources.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"GATES","ref":"./gates.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"ARTIFACTS","ref":"./artifacts.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"EVIDENCE","ref":"./evidence.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"HYPOTHESES","ref":"./hypotheses.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"RISKS","ref":"./risks.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"DECISIONS","ref":"./decisions.yaml","authority_scope":"INITIATIVE_LOCAL","required":true},
+    {"registry_type":"PROSPECT_RELATIONSHIPS","ref":"./prospect-relationships.yaml","authority_scope":"INITIATIVE_LOCAL","required":false}
+  ],
+  "projection_policy": {"canonical_format":"YAML","generated_files_are_authoritative":false,"generated_json":"../generated/initiative.json","dashboard_consumer":"../dashboard/index.html"},
+  "extensions": {"domain.commercial_context":{"originating_prospect":"prospect-002"}},
+  "updated_at":"2026-08-23T11:20:00-04:00"
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adumun.local/schemas/initiative-governance/initiative-manifest.schema.json",
+  "title": "ADÜMÜN Initiative Governance Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "contract_version", "initiative", "profile", "lifecycle", "registries", "projection_policy", "updated_at"],
+  "properties": {
+    "schema_version": {"const": "initiative-manifest.v1"},
+    "contract_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "initiative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "repository"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "short_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9-]{1,15}$"},
+        "name": {"type": "string", "minLength": 1},
+        "repository": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"}
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary", "rigor"],
+      "properties": {
+        "primary": {"type": "string", "minLength": 1},
+        "rigor": {"enum": ["L0_LIGHT", "L1_REDUCED", "L2_STANDARD", "L3_HIGH"]},
+        "modifiers": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "tailoring_ref": {"type": "string", "minLength": 1}
+      }
+    },
+    "adoption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": {"enum": ["PROSPECTIVE_ADOPTION_FROM_INCEPTION", "RETROSPECTIVE_ADOPTION"]},
+        "adopted_at": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "historical_gate_policy": {"type": "string", "minLength": 1}
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": {"type": "string", "minLength": 1},
+        "canonical_state": {"type": ["string", "null"]},
+        "current_stage": {"type": ["string", "null"]},
+        "current_stage_name": {"type": ["string", "null"]},
+        "current_gate": {"type": ["string", "null"]},
+        "last_accepted_gate": {"type": ["string", "null"]},
+        "last_gate_decision_record": {"type": ["string", "null"]},
+        "gate_history_complete": {"type": "boolean"},
+        "reconciliation_status": {"enum": ["CURRENT", "RECONCILIATION_REQUIRED", "HISTORICAL"]}
+      }
+    },
+    "registries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["registry_type", "ref", "authority_scope"],
+        "properties": {
+          "registry_type": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+          "ref": {"type": "string", "minLength": 1},
+          "authority_scope": {"enum": ["INITIATIVE_LOCAL", "DOMAIN_LOCAL", "ENTERPRISE_REFERENCE"]},
+          "required": {"type": "boolean", "default": false}
+        }
+      }
+    },
+    "projection_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_format", "generated_files_are_authoritative"],
+      "properties": {
+        "canonical_format": {"enum": ["YAML", "JSON"]},
+        "generated_files_are_authoritative": {"type": "boolean"},
+        "generated_json": {"type": "string"},
+        "portfolio_projection": {"type": "string"},
+        "dashboard_consumer": {"type": "string"}
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "patternProperties": {"^[a-z][a-z0-9_.-]+$": {}},
+      "additionalProperties": false
+    },
+    "updated_at": {"type": "string", "minLength": 1}
+  }
+}
