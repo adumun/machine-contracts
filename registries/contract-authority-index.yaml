@@ -1,0 +1,112 @@
+registryVersion: 1.0.0
+schemaVersion: 1.0.0
+status: CANDIDATE
+predecessor:
+  repository: cmartinezs/the-x-contract-registry
+  path: registry/contracts.yaml
+  blobSha: 2875e5939d4c983cbf64a6d6157c2e25b8c5755a
+contracts:
+  - id: capability
+    name: Capability
+    version: 1.0.0
+    authorityState: EXTERNAL_LEGACY
+    semanticAuthority: cmartinezs/powerful-brain
+    status: ACTIVE
+    successorRef: null
+    notes: Legacy authority observation preserved; ADÜMÜN has not silently transferred semantic ownership.
+    provenance:
+      evidenceStatus: CONFIRMED
+      observedAt: '2026-08-22'
+      sourceRefs: [cmartinezs/powerful-brain:TRANSVERSAL-CONTRACTS.md]
+      confidence: HIGH
+  - id: work-item
+    name: WorkItem
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: adumun/machine-contracts
+    status: CANDIDATE
+    successorRef: schemas/work-management/work-item.schema.json
+    notes: ADÜMÜN candidate machine contract now exists; legacy authority observation remains provenance.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-24'
+      sourceRefs: [evidence/MC-V0.1-COMPLETION.md]
+      confidence: HIGH
+  - id: capacity-budget
+    name: CapacityBudget
+    version: 1.0.0
+    authorityState: EXTERNAL_LEGACY
+    semanticAuthority: cmartinezs/powerful-brain
+    status: ACTIVE
+    successorRef: null
+    notes: No ADÜMÜN schema promoted yet; legacy semantic authority remains external to the deprecated registry.
+    provenance:
+      evidenceStatus: CONFIRMED
+      observedAt: '2026-08-22'
+      sourceRefs: [cmartinezs/powerful-brain:TRANSVERSAL-CONTRACTS.md]
+      confidence: HIGH
+  - id: commitment
+    name: Commitment
+    version: 1.0.0
+    authorityState: EXTERNAL_LEGACY
+    semanticAuthority: cmartinezs/powerful-brain
+    status: ACTIVE
+    successorRef: null
+    notes: No ADÜMÜN schema promoted yet; legacy semantic authority remains external to the deprecated registry.
+    provenance:
+      evidenceStatus: CONFIRMED
+      observedAt: '2026-08-22'
+      sourceRefs: [cmartinezs/powerful-brain:TRANSVERSAL-CONTRACTS.md]
+      confidence: HIGH
+  - id: execution-record
+    name: ExecutionRecord
+    version: 1.0.0
+    authorityState: EXTERNAL_LEGACY
+    semanticAuthority: cmartinezs/powerful-brain
+    status: ACTIVE
+    successorRef: null
+    notes: No ADÜMÜN schema promoted yet; legacy semantic authority remains external to the deprecated registry.
+    provenance:
+      evidenceStatus: CONFIRMED
+      observedAt: '2026-08-22'
+      sourceRefs: [cmartinezs/powerful-brain:TRANSVERSAL-CONTRACTS.md]
+      confidence: HIGH
+  - id: agent-definition
+    name: AgentDefinition
+    version: 1.0.0
+    authorityState: EXTERNAL_LEGACY
+    semanticAuthority: cmartinezs/powerful-brain
+    status: ACTIVE
+    successorRef: null
+    notes: No ADÜMÜN schema promoted yet; legacy semantic authority remains external to the deprecated registry.
+    provenance:
+      evidenceStatus: CONFIRMED
+      observedAt: '2026-08-22'
+      sourceRefs: [cmartinezs/powerful-brain:TRANSVERSAL-CONTRACTS.md]
+      confidence: HIGH
+  - id: initiative-manifest
+    name: Initiative Manifest
+    version: 0.1.0
+    authorityState: RECONCILIATION_REQUIRED
+    semanticAuthority: DISTRIBUTED_INITIATIVE_REPOSITORIES
+    status: RECONCILIATION_REQUIRED
+    successorRef: null
+    notes: The legacy registry never owned initiative semantics; distributed initiative-local authority remains intact pending a future explicit promotion decision.
+    provenance:
+      evidenceStatus: PROVISIONAL
+      observedAt: '2026-08-22'
+      sourceRefs: [legacy:registry/contracts.yaml]
+      confidence: MEDIUM
+  - id: shipping-runtime-contracts
+    name: Shipping Mode Runtime Contracts
+    version: 1.0.0
+    authorityState: EXTERNAL_LEGACY
+    semanticAuthority: cmartinezs/shipping-mode
+    status: ACTIVE
+    successorRef: null
+    notes: Execution/planning/release runtime semantics remain owned by Shipping Mode; the legacy contract registry was only an index.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-22'
+      sourceRefs: [cmartinezs/shipping-mode:README.md]
+      confidence: HIGH
