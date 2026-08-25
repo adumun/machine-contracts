@@ -1,0 +1,47 @@
+{
+  "schema_version": "decision-registry.v1",
+  "registry_id": "REG-DEC-001",
+  "status": "CURRENT",
+  "decisions": [
+    {
+      "schema_version": "decision-record.v1",
+      "decision_id": "DEC-ADM-001",
+      "title": "Repository cutover is distinct from enterprise migration closure",
+      "decision_class": "ENTERPRISE_DECISION",
+      "authority_scope": "Legacy Migration & Authority",
+      "authority_owner": "Governance & Audit",
+      "status": "ACCEPTED",
+      "authority_mode": "REGISTRY_AUTHORITY",
+      "decision_statement": "Repository migration completion does not imply enterprise migration completion; GATE-MIG-CLOSE-001 C1-C10 still governs enterprise closure.",
+      "source_ref": "ADÜMÜN Transversal Migration Gap Register",
+      "effective_at": "2026-08-24",
+      "evidence_refs": ["GATE-MIG-CLOSE-001", "TRV-041"],
+      "supersedes": [],
+      "superseded_by": null,
+      "related_decisions": [],
+      "adr_ref": null,
+      "gate_decision_ref": null,
+      "provenance": {"source_type": "ENTERPRISE_RECONCILIATION", "source_refs": ["REG-MIG-GAPS-001"]}
+    },
+    {
+      "schema_version": "decision-record.v1",
+      "decision_id": "DEC-ICC-002",
+      "title": "Authority boundary",
+      "decision_class": "INITIATIVE_DECISION",
+      "authority_scope": "initiative-control-center",
+      "authority_owner": "Initiative Control Center",
+      "status": "ACCEPTED",
+      "authority_mode": "SOURCE_AUTHORITY",
+      "decision_statement": null,
+      "source_ref": "cmartinezs/initiative-control-center:governance/decisions.yaml#DEC-ICC-002",
+      "effective_at": "2026-08-18",
+      "evidence_refs": ["DECISIONS.md"],
+      "supersedes": [],
+      "superseded_by": null,
+      "related_decisions": ["DEC-ADM-001"],
+      "adr_ref": null,
+      "gate_decision_ref": null,
+      "provenance": {"source_type": "INITIATIVE_LOCAL_DECISION_LOG", "source_refs": ["cmartinezs/initiative-control-center:governance/decisions.yaml"]}
+    }
+  ]
+}
