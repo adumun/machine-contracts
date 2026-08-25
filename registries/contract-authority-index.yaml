@@ -100,6 +100,38 @@ contracts:
         - evidence/TRV-014-RECONCILIATION.md
         - profiles/initiative-governance/legacy-ils-0.2-alpha.mapping.yaml
       confidence: HIGH
+  - id: decision-record
+    name: DecisionRecord
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-DEC-001
+    status: ACTIVE
+    successorRef: schemas/decision-governance/decision-record.schema.json
+    notes: Encodes enterprise/federated decision identity, authority scope, status, lineage and ADR/gate references without taking authority from bounded-context source records.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-24'
+      sourceRefs:
+        - STD-DEC-001
+        - REG-DEC-001
+        - evidence/GAP-06-DECISION-REGISTRY.md
+      confidence: HIGH
+  - id: decision-registry
+    name: DecisionRegistry
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-DEC-001
+    status: ACTIVE
+    successorRef: schemas/decision-governance/decision-registry.schema.json
+    notes: Structured enterprise registry supports registry-authoritative decisions and source-authoritative indexed decisions with explicit lineage.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-24'
+      sourceRefs:
+        - STD-DEC-001
+        - REG-DEC-001
+        - evidence/GAP-06-DECISION-REGISTRY.md
+      confidence: HIGH
   - id: shipping-runtime-contracts
     name: Shipping Mode Runtime Contracts
     version: 1.0.0
