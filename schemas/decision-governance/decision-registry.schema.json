@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://adumun.dev/schemas/decision-governance/decision-registry.schema.json",
+  "title":"ADÜMÜN DecisionRegistry",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema_version","registry_id","status","decisions"],
+  "properties":{
+    "schema_version":{"const":"decision-registry.v1"},
+    "registry_id":{"type":"string","minLength":3},
+    "status":{"enum":["CURRENT","DRAFT","HISTORICAL"]},
+    "decisions":{"type":"array","items":{"$ref":"decision-record.schema.json"}}
+  }
+}

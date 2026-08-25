@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adumun.dev/schemas/decision-governance/decision-record.schema.json",
+  "title": "ADÜMÜN DecisionRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","decision_id","title","decision_class","authority_scope","authority_owner","status","authority_mode","source_ref","provenance"],
+  "properties": {
+    "schema_version": {"const": "decision-record.v1"},
+    "decision_id": {"type":"string","minLength":3},
+    "title": {"type":"string","minLength":1},
+    "decision_class": {"enum":["ENTERPRISE_DECISION","DOMAIN_DECISION","INITIATIVE_DECISION","ARCHITECTURE_DECISION","GATE_DECISION","EXCEPTION_DECISION"]},
+    "authority_scope": {"type":"string","minLength":1},
+    "authority_owner": {"type":"string","minLength":1},
+    "status": {"enum":["PROPOSED","ACCEPTED","ACCEPTED_WITH_CONDITIONS","SUPERSEDED","REVOKED","HISTORICAL","REJECTED"]},
+    "authority_mode": {"enum":["REGISTRY_AUTHORITY","SOURCE_AUTHORITY"]},
+    "decision_statement": {"type":["string","null"]},
+    "source_ref": {"type":"string","minLength":1},
+    "effective_at": {"type":["string","null"]},
+    "recorded_at": {"type":["string","null"]},
+    "rationale": {"type":["string","null"]},
+    "evidence_refs": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "supersedes": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "superseded_by": {"type":["string","null"]},
+    "related_decisions": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "adr_ref": {"type":["string","null"]},
+    "gate_decision_ref": {"type":["string","null"]},
+    "conditions": {"type":"array","items":{"type":"string"}},
+    "provenance": {"type":"object","required":["source_type"],"properties":{"source_type":{"type":"string"},"source_refs":{"type":"array","items":{"type":"string"}},"notes":{"type":["string","null"]}},"additionalProperties":true}
+  }
+}
