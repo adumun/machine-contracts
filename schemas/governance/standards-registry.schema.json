@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.adumun.org/governance/standards-registry.schema.json",
+  "title": "ADUMUN Repository Standards Registry",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["registryVersion", "schemaVersion", "status", "standards", "adoptionLevels", "conformanceMaturity", "enforcementLifecycle"],
+  "properties": {
+    "registryVersion": {"type": "string"},
+    "schemaVersion": {"const": "1.0.0"},
+    "status": {"type": "string"},
+    "standards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "requiredByDefault", "dependsOn"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^RS-[A-Z0-9-]+$"},
+          "name": {"type": "string", "minLength": 1},
+          "aliases": {"type": "array", "items": {"type": "string"}},
+          "requiredByDefault": {"type": "boolean"},
+          "dependsOn": {"type": "array", "items": {"type": "string", "pattern": "^RS-[A-Z0-9-]+$"}}
+        },
+        "additionalProperties": true
+      }
+    },
+    "adoptionLevels": {"type": "array", "items": {"enum": ["REQUIRED", "APPLICABLE", "RECOMMENDED", "NOT_APPLICABLE", "DEFERRED"]}},
+    "conformanceMaturity": {"type": "object"},
+    "enforcementLifecycle": {"type": "array", "items": {"enum": ["OBSERVED", "CANDIDATE", "PILOTED", "STANDARDIZED", "ENFORCED"]}}
+  }
+}
