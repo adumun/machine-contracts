@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.adumun.org/governance/relationship-registry.schema.json",
+  "title": "ADUMUN Governance Relationship Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["registryVersion", "schemaVersion", "status", "relationshipTypes", "relationships"],
+  "properties": {
+    "registryVersion": {"type": "string"},
+    "schemaVersion": {"const": "1.0.0"},
+    "status": {"type": "string"},
+    "relationshipTypes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "from", "to", "status"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "type": {"type": "string"},
+          "from": {"type": "string", "minLength": 1},
+          "to": {"type": "string", "minLength": 1},
+          "scope": {"type": "string"},
+          "status": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "historicalPredecessor": {"type": "object"}
+  }
+}
