@@ -1,0 +1,10 @@
+{
+  "schema_version": "initiative-manifest.v1",
+  "contract_version": "1.0.0",
+  "initiative": {"id":"bad-projection","name":"Bad Projection","repository":"example/bad-projection"},
+  "profile": {"primary":"PRODUCT_SAAS","rigor":"L2_STANDARD"},
+  "lifecycle": {"state":"DISCOVERING","canonical_state":null,"reconciliation_status":"CURRENT"},
+  "registries": [],
+  "projection_policy": {"canonical_format":"YAML","generated_files_are_authoritative":true},
+  "updated_at":"2026-08-24T22:40:00-04:00"
+}
