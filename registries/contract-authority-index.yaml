@@ -85,18 +85,21 @@ contracts:
       sourceRefs: [cmartinezs/powerful-brain:TRANSVERSAL-CONTRACTS.md]
       confidence: HIGH
   - id: initiative-manifest
-    name: Initiative Manifest
-    version: 0.1.0
-    authorityState: RECONCILIATION_REQUIRED
+    name: Initiative Governance Manifest
+    version: 1.0.0
+    authorityState: DISTRIBUTED_WITH_ENTERPRISE_CONTRACT
     semanticAuthority: DISTRIBUTED_INITIATIVE_REPOSITORIES
-    status: RECONCILIATION_REQUIRED
-    successorRef: null
-    notes: The legacy registry never owned initiative semantics; distributed initiative-local authority remains intact pending a future explicit promotion decision.
+    status: ACTIVE
+    successorRef: schemas/initiative-governance/initiative-manifest.schema.json
+    notes: STD-IGM-001 defines the enterprise interoperability envelope while initiative repositories retain scoped semantic authority for local registries and domain extensions. The machine schema validates shared semantics without centralizing local truth.
     provenance:
-      evidenceStatus: PROVISIONAL
-      observedAt: '2026-08-22'
-      sourceRefs: [legacy:registry/contracts.yaml]
-      confidence: MEDIUM
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-24'
+      sourceRefs:
+        - STD-IGM-001
+        - evidence/TRV-014-RECONCILIATION.md
+        - profiles/initiative-governance/legacy-ils-0.2-alpha.mapping.yaml
+      confidence: HIGH
   - id: shipping-runtime-contracts
     name: Shipping Mode Runtime Contracts
     version: 1.0.0
