@@ -1,0 +1,27 @@
+{
+  "schema_version": "decision-registry.v1",
+  "registry_id": "REG-DEC-INVALID",
+  "status": "CURRENT",
+  "decisions": [
+    {
+      "schema_version": "decision-record.v1",
+      "decision_id": "DEC-OLD-001",
+      "title": "Old decision",
+      "decision_class": "ENTERPRISE_DECISION",
+      "authority_scope": "Example",
+      "authority_owner": "Governance & Audit",
+      "status": "SUPERSEDED",
+      "authority_mode": "REGISTRY_AUTHORITY",
+      "decision_statement": "Old statement",
+      "source_ref": "example",
+      "effective_at": "2026-08-01",
+      "evidence_refs": [],
+      "supersedes": [],
+      "superseded_by": null,
+      "related_decisions": [],
+      "adr_ref": null,
+      "gate_decision_ref": null,
+      "provenance": {"source_type": "TEST"}
+    }
+  ]
+}
