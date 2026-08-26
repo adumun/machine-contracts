@@ -3,7 +3,7 @@
   "contract_version":"1.0.0",
   "answer_id":"COI-ANS-FUNDING-OPERATING-MINIMUM",
   "concern_family":"FH-CF-01",
-  "canonical_concept":"OPERATING_MINIMUM_MONTHLY",
+  "canonical_concept":"FUNDING_OPERATING_MINIMUM_MONTHLY",
   "display_label":"Operating minimum mensual",
   "business_meaning":"Minimum monthly funding target for current operating baseline.",
   "value_state":"KNOWN",
