@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adumun.local/schemas/corporate-operating-intelligence/derivation-metadata.schema.json",
+  "title": "ADÜMÜN COI Derivation Metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","contract_version","derivation_id","derivation_version","deterministic","inference","input_refs","contract_refs","rule_ref","generator_revision","rebuild_ref"],
+  "properties": {
+    "schema_version": {"const": "coi-derivation-metadata.v1"},
+    "contract_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "derivation_id": {"type": "string", "pattern": "^COI-DER-[A-Z0-9][A-Z0-9._-]*$"},
+    "derivation_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "deterministic": {"const": true},
+    "inference": {"const": false},
+    "input_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "contract_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "rule_ref": {"type": "string", "minLength": 1},
+    "generator_revision": {"type": "string", "minLength": 7},
+    "rebuild_ref": {"type": "string", "minLength": 1},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+  }
+}
