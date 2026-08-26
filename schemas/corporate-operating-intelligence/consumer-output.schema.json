@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adumun.local/schemas/corporate-operating-intelligence/consumer-output.schema.json",
+  "title": "ADÜMÜN COI Consumer Output",
+  "type": "object",
+  "required": ["schema_version","contract_version","consumer_type","read_model_id","snapshot_as_of","snapshot_freshness_state","snapshot_reconciliation_state","authority_mode","status","limitations"],
+  "properties": {
+    "schema_version": {"const": "coi-consumer-output.v1"},
+    "contract_version": {"type": "string"},
+    "consumer_type": {"enum": ["QUICK_LOOKUP","EXECUTIVE_SNAPSHOT","EVIDENCE_TRACE"]},
+    "read_model_id": {"const": "RM-COI-001"},
+    "snapshot_as_of": {"type": "string", "format": "date-time"},
+    "snapshot_freshness_state": {"enum": ["CURRENT","STALE","UNKNOWN","REVIEW_REQUIRED"]},
+    "snapshot_reconciliation_state": {"enum": ["CURRENT","RECONCILIATION_REQUIRED","UNAVAILABLE"]},
+    "authority_mode": {"const": "DERIVED_NON_AUTHORITATIVE"},
+    "status": {"enum": ["FOUND","NOT_FOUND","AVAILABLE","UNAVAILABLE"]},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "query": {"type": "object"},
+    "fact": {"type": ["object","null"]},
+    "fact_key": {"type": "string"},
+    "trace": {"type": ["object","null"]},
+    "source_status_summary": {"type": "object"},
+    "fact_count": {"type": "integer", "minimum": 0},
+    "attention_count": {"type": "integer", "minimum": 0},
+    "sections": {"type": "object"},
+    "attention": {"type": "array"}
+  },
+  "additionalProperties": false
+}
