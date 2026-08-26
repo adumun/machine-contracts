@@ -1,0 +1,109 @@
+schema_version: coi-contract-profile.v1
+contract_version: 1.0.0
+standard_ref: STD-COI-001
+decision_ref: DEC-ACC-G7-001
+initiative_id: INIT-ACC-001
+capability_id: CAP-COI-001
+scope: FIRST_HORIZON_READ_MODEL_AGENT_FIRST
+principles:
+  consumer_independent_semantics: true
+  provider_neutral: true
+  file_json_first: true
+  derived_authority: DERIVED_NON_AUTHORITATIVE
+  fail_closed_unknowns: true
+  semantic_inference: PROHIBITED
+consumer_contracts:
+  QuickLookupResult: schemas/corporate-operating-intelligence/material-answer.schema.json
+  ExecutiveSnapshot: schemas/corporate-operating-intelligence/materialized-snapshot.schema.json
+  EvidenceTrace: schemas/corporate-operating-intelligence/material-answer.schema.json#provenance
+contract_inventory:
+  - id: coi-material-answer
+    path: schemas/corporate-operating-intelligence/material-answer.schema.json
+    version: 1.0.0
+    authority_state: ADUMUN_CANONICAL
+  - id: coi-source-envelope
+    path: schemas/corporate-operating-intelligence/source-envelope.schema.json
+    version: 1.0.0
+    authority_state: ADUMUN_CANONICAL
+  - id: coi-concern-record
+    path: schemas/corporate-operating-intelligence/concern-record.schema.json
+    version: 1.0.0
+    authority_state: ADUMUN_CANONICAL
+  - id: coi-canonical-concept
+    path: schemas/corporate-operating-intelligence/canonical-concept.schema.json
+    version: 1.0.0
+    authority_state: ADUMUN_CANONICAL
+  - id: coi-canonical-concept-registry
+    path: schemas/corporate-operating-intelligence/canonical-concept-registry.schema.json
+    version: 1.0.0
+    authority_state: ADUMUN_CANONICAL
+  - id: coi-derivation-metadata
+    path: schemas/corporate-operating-intelligence/derivation-metadata.schema.json
+    version: 1.0.0
+    authority_state: ADUMUN_CANONICAL
+  - id: coi-source-health
+    path: schemas/corporate-operating-intelligence/source-health.schema.json
+    version: 1.0.0
+    authority_state: ADUMUN_CANONICAL
+  - id: coi-read-model-metadata
+    path: schemas/corporate-operating-intelligence/read-model-metadata.schema.json
+    version: 1.0.0
+    authority_state: ADUMUN_CANONICAL
+  - id: coi-corporate-operating-snapshot
+    path: schemas/corporate-operating-intelligence/materialized-snapshot.schema.json
+    version: 1.0.0
+    authority_state: ADUMUN_CANONICAL
+  - id: coi-contract-profile
+    path: schemas/corporate-operating-intelligence/contract-profile.schema.json
+    version: 1.0.0
+    authority_state: ADUMUN_CANONICAL
+versioning:
+  scheme: SEMVER
+  patch: NO_ACCEPTED_INSTANCE_SEMANTIC_CHANGE
+  minor: BACKWARD_COMPATIBLE_ADDITION
+  major: BREAKING_STRUCTURAL_OR_SEMANTIC_CHANGE
+  breaking_requires_migration: true
+  lineage_required: true
+compatibility:
+  structural_and_semantic: true
+  unknown_vocab: FAIL_CLOSED
+  provider_mapping_semantic_override: PROHIBITED
+  silent_reinterpretation: PROHIBITED
+ownership:
+  delivery_owner: Corporate Technology & Platform
+  semantic_stewardship: Data, Knowledge & AI + bounded domain authority
+  assurance: Governance & Audit
+  machine_contract_home: adumun/machine-contracts
+  human_semantic_home: adumun/governance:STD-COI-001
+  source_truth_authority: BOUNDED_AUTHORITATIVE_SOURCES
+registration:
+  contract_authority_index: registries/contract-authority-index.yaml
+  canonical_concept_registry: registries/corporate-operating-intelligence/concepts.v1.yaml
+  registration_required: true
+rebuildability:
+  derived_read_models_disposable: true
+  deterministic: true
+  inference: false
+  input_refs_required: true
+  generator_revision_required: true
+  rebuild_ref_required: true
+  exact_revision_local_validation: true
+  paid_actions_required: false
+required_semantic_partitions:
+  finance:
+    - TARGET
+    - PIPELINE
+    - CONTRACTED
+    - BOOKED_COMMITTED
+    - BILLED
+    - COLLECTED_CASH
+    - RECOGNIZED_REVENUE
+    - PREDICTABLE_COVERAGE
+  state_dimensions:
+    - LIFECYCLE_STATE
+    - LIFECYCLE_STAGE
+    - GATE_STATE
+    - PRODUCT_READINESS
+    - CAPABILITY_MATURITY
+    - WORK_STATE
+    - DELIVERY_STATE
