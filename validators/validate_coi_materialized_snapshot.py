@@ -3,16 +3,20 @@ from __future__ import annotations
 
 import copy
 import json
+import sys
 from pathlib import Path
 
 import yaml
 from jsonschema import Draft202012Validator, FormatChecker
 from referencing import Registry, Resource
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from tools.coi_readers import read_bundle
 from tools.coi_materializer import materialize, quick_lookup, executive_briefing_projection, static_view_projection
 
-ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas" / "corporate-operating-intelligence"
 MAPPING_PATH = ROOT / "mappings" / "corporate-operating-intelligence" / "source-fact-mapping.v1.yaml"
 FIXTURE_PATH = ROOT / "examples" / "corporate-operating-intelligence" / "reader-input.synthetic.json"
