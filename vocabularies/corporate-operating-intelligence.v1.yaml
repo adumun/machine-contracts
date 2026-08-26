@@ -1,6 +1,7 @@
 schema_version: coi-vocabulary.v1
-contract_version: 1.1.0
+contract_version: 1.2.0
 normative_sources:
+  - STD-COI-001 — Corporate Operating Intelligence Contract & Read-Model Semantics
   - 36 - S5 Product-Service Discovery — Corporate Operating Intelligence v0.1
   - 39 - S6 Solution & Feasibility Assessment — Corporate Operating Intelligence v0.1
   - 41 - S7 Initiative Readiness & First-Horizon Delivery Plan — Corporate Operating Intelligence v0.1
@@ -24,6 +25,7 @@ value_states:
 authority_modes:
   - SOURCE_AUTHORITY
   - REGISTRY_AUTHORITY
+  - MIXED_REGISTRY_SOURCE_AUTHORITY
   - DERIVED_NON_AUTHORITATIVE
   - OBSERVATION
   - ESTIMATE
@@ -33,6 +35,15 @@ freshness_states:
   - STALE
   - UNKNOWN
   - REVIEW_REQUIRED
+reconciliation_states:
+  - CURRENT
+  - RECONCILIATION_REQUIRED
+  - UNAVAILABLE
+availability_states:
+  - AVAILABLE
+  - DEGRADED
+  - UNAVAILABLE
+  - UNKNOWN
 confidentiality_classes:
   - PUBLIC
   - INTERNAL
@@ -40,21 +51,26 @@ confidentiality_classes:
   - LEGAL_CONFIDENTIAL
   - PEOPLE_CONFIDENTIAL
 semantic_classes:
-  TARGET: Desired or required future/threshold value; never actual.
-  ACTUAL: Observed authoritative actual value.
+  TARGET: Desired or required future/threshold value; never actual, pipeline, contracted, billed, collected, recognized or predictable coverage.
+  ACTUAL: Observed authoritative actual value; only usable where the bounded domain defines what actual means.
   FORECAST: Forward-looking modeled expectation.
   ESTIMATE: Non-authoritative bounded estimate.
-  PIPELINE: Potential commercial value not equivalent to booked, billed, recognized or collected value.
-  BOOKED_COMMITTED: Governed commercial commitment distinct from billed, collected or recognized value.
-  BILLED: Invoiced/billed value distinct from collected cash or recognized revenue.
+  PIPELINE: Potential commercial value not equivalent to contracted, booked, billed, recognized, collected, predictable coverage or target.
+  CONTRACTED: Contractually committed value under the applicable commercial/legal authority; distinct from pipeline, booked operational commitment, billed, recognized or collected value.
+  BOOKED_COMMITTED: Governed booked/committed commercial value distinct from contracted legal value, billed, collected or recognized value.
+  BILLED: Invoiced/billed value distinct from contracted, collected cash or recognized revenue.
   COLLECTED_CASH: Cash actually collected under Finance/Treasury authority.
   RECOGNIZED_REVENUE: Revenue recognized under applicable accounting authority.
-  PREDICTABLE_COVERAGE: Governed recurring/predictable coverage measure; distinct from collected cash, recognized revenue, booked value and pipeline.
-  LIFECYCLE_STATE: Canonical initiative lifecycle state.
-  LIFECYCLE_STAGE: Current lifecycle stage; distinct from canonical lifecycle state and gate state.
-  GATE_STATE: Canonical lifecycle gate and outcome state.
+  PREDICTABLE_COVERAGE: Governed recurring/predictable coverage measure; distinct from collected cash, recognized revenue, contracted/booked value, billed value, pipeline and target.
+  LIFECYCLE_STATE: Canonical initiative lifecycle state; distinct from stage, gate, readiness, maturity, work and delivery state.
+  LIFECYCLE_STAGE: Current lifecycle stage; distinct from canonical lifecycle state, gate, readiness, maturity, work and delivery state.
+  GATE_STATE: Canonical lifecycle gate and outcome state; distinct from lifecycle state/stage and other operational states.
+  PRODUCT_READINESS: Product/service readiness dimension; never substituted with lifecycle, capability maturity, work or delivery state.
+  CAPABILITY_MATURITY: Capability maturity dimension; never substituted with product readiness, lifecycle, work or delivery state.
+  WORK_STATE: Executable work-item state under the applicable work-management contract; not lifecycle or delivery state.
+  DELIVERY_STATE: Delivery/release execution state under the applicable delivery authority; not initiative lifecycle, readiness, maturity or work-item state.
   DECISION_STATUS: Governed decision lifecycle/status.
   AUTHORITY_STATUS: Authority mode/status of a governed record.
   STRUCTURAL_OWNERSHIP: Organizational accountability/ownership relation.
   SOURCE_HEALTH: Availability, freshness or integrity state of a governed source/read model.
-  DERIVED_ATTENTION: Non-authoritative derived attention signal computed from governed inputs.
+  DERIVED_ATTENTION: Non-authoritative deterministic attention signal computed from governed inputs.
