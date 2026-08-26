@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adumun.local/schemas/corporate-operating-intelligence/canonical-concept.schema.json",
+  "title": "ADÜMÜN COI Canonical Concept",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","contract_version","concept_id","concern_family","semantic_class","business_meaning","value_kind","unit_policy","authority_expectation","allowed_value_states","stewardship_owner","status","source_refs"],
+  "properties": {
+    "schema_version": {"const": "coi-canonical-concept.v1"},
+    "contract_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "concept_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+    "concern_family": {"enum": ["FH-CF-01","FH-CF-02","FH-CF-03","FH-CF-04","FH-CF-05"]},
+    "semantic_class": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+    "business_meaning": {"type": "string", "minLength": 1},
+    "value_kind": {"enum": ["NUMBER","INTEGER","STRING","BOOLEAN","DATE","DATETIME","ENUM","OBJECT","ANY"]},
+    "unit_policy": {"enum": ["REQUIRED","OPTIONAL","FORBIDDEN"]},
+    "unit": {"type": ["string","null"]},
+    "authority_expectation": {"enum": ["SOURCE_AUTHORITY","REGISTRY_AUTHORITY","MIXED_REGISTRY_SOURCE_AUTHORITY","DERIVED_NON_AUTHORITATIVE","OBSERVATION","ESTIMATE","ASSUMPTION"]},
+    "allowed_value_states": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["KNOWN","UNKNOWN","MISSING","STALE","RECONCILIATION_REQUIRED","RESTRICTED","NOT_APPLICABLE"]}},
+    "stewardship_owner": {"type": "string", "minLength": 1},
+    "status": {"enum": ["ACTIVE","RESERVED","DEPRECATED","SUPERSEDED"]},
+    "predecessor_ref": {"type": ["string","null"]},
+    "successor_ref": {"type": ["string","null"]},
+    "source_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+  },
+  "allOf": [
+    {"if": {"properties": {"unit_policy": {"const": "REQUIRED"}}, "required": ["unit_policy"]}, "then": {"required": ["unit"], "properties": {"unit": {"type": "string", "minLength": 1}}}},
+    {"if": {"properties": {"unit_policy": {"const": "FORBIDDEN"}}, "required": ["unit_policy"]}, "then": {"properties": {"unit": {"const": null}}}},
+    {"if": {"properties": {"status": {"const": "SUPERSEDED"}}, "required": ["status"]}, "then": {"required": ["successor_ref"], "properties": {"successor_ref": {"type": "string", "minLength": 1}}}}
+  ]
+}
