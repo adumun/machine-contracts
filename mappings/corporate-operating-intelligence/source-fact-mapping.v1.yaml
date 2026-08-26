@@ -1,0 +1,250 @@
+schema_version: coi-source-fact-mapping.v1
+contract_version: 1.0.0
+initiative_id: INIT-ACC-001
+milestone: S8-M2
+mapping_policy:
+  read_only: true
+  semantic_inference: prohibited
+  missing_token_policy: explicit
+  authority_escalation: prohibited
+  consumer_authority: DERIVED_NON_AUTHORITATIVE
+  row_identity_policy: source_primary_key_only
+  notes:
+    - A mapping may normalize representation but must not infer a business fact that is not explicit in the governed source.
+    - Source tokens such as '-' or blank never become numeric zero.
+    - UNKNOWN carries no value; SOURCE_NOT_EVIDENCED is preserved in limitations.
+    - Source-level authority and freshness are copied into every projected fact.
+
+sources:
+  - source_id: RM-FUND-001
+    concern_family: FH-CF-01
+    provider: GOOGLE_SHEETS
+    spreadsheet_id: 1E3JKkTa2BZzSCmttxYxq4vSlYjn21gMWoRuYeJSO44Y
+    sheet: Dashboard
+    source_title: 03 - Funding Activation Portfolio & Dashboard — ADÜMÜN
+    authority_mode: DERIVED_NON_AUTHORITATIVE
+    authority_owner: Finance + Strategy & Portfolio
+    freshness_registry_ref: REG-RM-001:RM-FUND-001
+    selector_mode: LABEL_VALUE
+    row_identity: Dashboard singleton
+    mappings:
+      - canonical_concept: FUNDING_OPERATING_MINIMUM_MONTHLY
+        display_label: Consolidated operating minimum
+        match_column: A
+        match_value: WHAT — Consolidated Operating Minimum (CLP/mo)
+        value_column: B
+        interpretation_column: C
+        semantic_class: TARGET
+        unit: CLP_PER_MONTH
+        transform: PARSE_INTEGER_FORMATTED_NUMBER
+        missing_tokens: ['-', '']
+        missing_value_state: UNKNOWN
+        missing_limitation: SOURCE_NOT_EVIDENCED
+      - canonical_concept: FUNDING_PREDICTABLE_MONTHLY_COVERAGE
+        display_label: Predictable monthly coverage
+        match_column: A
+        match_value: Predictable coverage (CLP/mo)
+        value_column: B
+        interpretation_column: C
+        semantic_class: PREDICTABLE_COVERAGE
+        unit: CLP_PER_MONTH
+        transform: PARSE_INTEGER_FORMATTED_NUMBER
+        missing_tokens: ['-', '']
+        missing_value_state: UNKNOWN
+        missing_limitation: SOURCE_NOT_EVIDENCED
+      - canonical_concept: FUNDING_COVERAGE_GAP_MONTHLY
+        display_label: Monthly coverage gap
+        match_column: A
+        match_value: Coverage gap (CLP/mo)
+        value_column: B
+        interpretation_column: C
+        semantic_class: DERIVED_ATTENTION
+        unit: CLP_PER_MONTH
+        transform: PARSE_INTEGER_FORMATTED_NUMBER
+        missing_tokens: ['-', '']
+        missing_value_state: UNKNOWN
+        missing_limitation: SOURCE_NOT_EVIDENCED
+      - canonical_concept: FUNDING_COLLECTED_CASH_MTD
+        display_label: Collected cash month-to-date
+        match_column: A
+        match_value: Collected cash MTD (CLP)
+        value_column: B
+        interpretation_column: C
+        semantic_class: COLLECTED_CASH
+        unit: CLP
+        transform: PARSE_INTEGER_FORMATTED_NUMBER
+        missing_tokens: ['-', '']
+        missing_value_state: UNKNOWN
+        missing_limitation: SOURCE_NOT_EVIDENCED
+
+  - source_id: REG-INIT-LIFECYCLE-001
+    concern_family: FH-CF-02
+    provider: GOOGLE_SHEETS
+    spreadsheet_id: 166abEVeao7aw1mFE24n0iljGdB4AB8a3_Mo7_ybmynM
+    sheet: Registry
+    source_title: 01 - Initiative Lifecycle Registry — ADÜMÜN
+    authority_mode: REGISTRY_AUTHORITY
+    authority_owner: Strategy & Portfolio / Initiative Governance
+    freshness_registry_ref: REG-RM-001:RM-ILS-001
+    selector_mode: TABLE_COLUMNS
+    row_filter:
+      column: Portfolio Object Type
+      equals: INITIATIVE
+    row_identity_column: Normalized Object ID
+    row_identity_required: true
+    label_column: Initiative
+    mappings:
+      - canonical_concept: INITIATIVE_CANONICAL_LIFECYCLE_STATE
+        display_label: Canonical lifecycle state
+        value_column: Canonical Lifecycle State
+        semantic_class: LIFECYCLE_STATE
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING
+      - canonical_concept: INITIATIVE_CURRENT_STAGE
+        display_label: Current lifecycle stage
+        value_column: Lifecycle Stage
+        semantic_class: LIFECYCLE_STAGE
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING
+      - canonical_concept: INITIATIVE_CURRENT_GATE
+        display_label: Current gate
+        value_column: Current Gate
+        semantic_class: GATE_STATE
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING
+      - canonical_concept: INITIATIVE_GATE_OUTCOME
+        display_label: Current gate outcome/state
+        value_column: Gate Outcome
+        semantic_class: GATE_STATE
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: UNKNOWN
+        missing_limitation: GATE_OUTCOME_NOT_RECORDED
+
+  - source_id: REG-DEC-001
+    concern_family: FH-CF-03
+    provider: GOOGLE_SHEETS
+    spreadsheet_id: 1DxFF8RQkN_OikXyIGIFyeDHIpToCPuiuXMPgtbnZBKQ
+    sheet: Decision Registry
+    source_title: REG-DEC-001 — ADÜMÜN Enterprise Decision Registry
+    authority_mode: REGISTRY_AUTHORITY
+    authority_owner: Governance & Audit + applicable Decision Owner
+    freshness_registry_ref: SOURCE_REVIEW_OR_CHANGE
+    selector_mode: TABLE_COLUMNS
+    row_identity_column: decision_id
+    row_identity_required: true
+    label_column: title
+    mappings:
+      - canonical_concept: DECISION_STATUS
+        display_label: Decision status
+        value_column: status
+        semantic_class: DECISION_STATUS
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING
+      - canonical_concept: DECISION_AUTHORITY_MODE
+        display_label: Decision authority mode
+        value_column: authority_mode
+        semantic_class: AUTHORITY_STATUS
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING
+
+  - source_id: REG-STR-REC-001
+    concern_family: FH-CF-04
+    provider: GOOGLE_SHEETS
+    spreadsheet_id: 1fTD8C3IHLmHwHCqCa_GSaXlpxgaJLisk71nwcod0FkU
+    sheet: Structural Register
+    source_title: REG-STR-REC-001 — ADÜMÜN Structural Ownership & Lineage Register
+    authority_mode: REGISTRY_AUTHORITY
+    authority_owner: Strategy & Portfolio + Governance & Audit
+    freshness_registry_ref: SOURCE_REVIEW_OR_CHANGE
+    selector_mode: TABLE_COLUMNS
+    row_filter:
+      column: object_class
+      in:
+        - BUSINESS_VERTICAL
+        - CORPORATE_FUNCTION
+    row_identity_column: object_id
+    row_identity_required: true
+    label_column: canonical_name
+    mappings:
+      - canonical_concept: STRUCTURAL_PRIMARY_OWNER
+        display_label: Primary organizational owner
+        value_column: primary_owner
+        semantic_class: STRUCTURAL_OWNERSHIP
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING
+      - canonical_concept: STRUCTURAL_PARENT_UNIT
+        display_label: Parent organizational unit
+        value_column: parent_unit
+        semantic_class: STRUCTURAL_OWNERSHIP
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: UNKNOWN
+        missing_limitation: PARENT_UNIT_NOT_RECORDED
+      - canonical_concept: STRUCTURAL_RECONCILIATION_STATUS
+        display_label: Structural reconciliation status
+        value_column: reconciliation_status
+        semantic_class: AUTHORITY_STATUS
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING
+
+  - source_id: REG-RM-001
+    concern_family: FH-CF-05
+    provider: GOOGLE_SHEETS
+    spreadsheet_id: 1BjctYRhjufit-fCh5XdZHehPXyf-O9gn4rBcAknR4AQ
+    sheet: Read Models
+    source_title: REG-RM-001 — ADÜMÜN Read Model & Freshness Registry
+    authority_mode: REGISTRY_AUTHORITY
+    authority_owner: Governance & Audit + Data, Knowledge & AI
+    freshness_registry_ref: SELF
+    selector_mode: TABLE_COLUMNS
+    row_identity_column: read_model_id
+    row_identity_required: true
+    label_column: name
+    mappings:
+      - canonical_concept: READ_MODEL_FRESHNESS_STATE
+        display_label: Read-model freshness state
+        value_column: freshness_state
+        semantic_class: SOURCE_HEALTH
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING
+      - canonical_concept: READ_MODEL_AUTHORITY_MODE
+        display_label: Read-model authority mode
+        value_column: authority_mode
+        semantic_class: AUTHORITY_STATUS
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING
+      - canonical_concept: READ_MODEL_LIFECYCLE
+        display_label: Read-model lifecycle
+        value_column: lifecycle
+        semantic_class: SOURCE_HEALTH
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING
+      - canonical_concept: READ_MODEL_DISPOSITION
+        display_label: Read-model disposition
+        value_column: disposition
+        semantic_class: SOURCE_HEALTH
+        transform: COPY_STRING
+        missing_tokens: ['']
+        missing_value_state: MISSING
+        missing_limitation: REQUIRED_SOURCE_FIELD_MISSING

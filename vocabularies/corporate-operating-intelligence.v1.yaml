@@ -1,11 +1,12 @@
 schema_version: coi-vocabulary.v1
-contract_version: 1.0.0
+contract_version: 1.1.0
 normative_sources:
   - 36 - S5 Product-Service Discovery — Corporate Operating Intelligence v0.1
   - 39 - S6 Solution & Feasibility Assessment — Corporate Operating Intelligence v0.1
   - 41 - S7 Initiative Readiness & First-Horizon Delivery Plan — Corporate Operating Intelligence v0.1
   - 42 - G7 Gate Decision & S8 Delivery Entry — Corporate Operating Intelligence v0.1
   - 43 - Pre-S8 Canonical Reconciliation — Corporate Operating Intelligence v0.1
+  - 44 - S8 M1 Contract Baseline Completion — Corporate Operating Intelligence v0.1
 concern_families:
   FH-CF-01: Funding / Finance boundary
   FH-CF-02: Initiative Lifecycle / Portfolio state
@@ -48,7 +49,9 @@ semantic_classes:
   BILLED: Invoiced/billed value distinct from collected cash or recognized revenue.
   COLLECTED_CASH: Cash actually collected under Finance/Treasury authority.
   RECOGNIZED_REVENUE: Revenue recognized under applicable accounting authority.
+  PREDICTABLE_COVERAGE: Governed recurring/predictable coverage measure; distinct from collected cash, recognized revenue, booked value and pipeline.
   LIFECYCLE_STATE: Canonical initiative lifecycle state.
+  LIFECYCLE_STAGE: Current lifecycle stage; distinct from canonical lifecycle state and gate state.
   GATE_STATE: Canonical lifecycle gate and outcome state.
   DECISION_STATUS: Governed decision lifecycle/status.
   AUTHORITY_STATUS: Authority mode/status of a governed record.
