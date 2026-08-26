@@ -1,0 +1,28 @@
+{
+  "schema_version": "coi-read-model-metadata.v1",
+  "contract_version": "1.0.0",
+  "read_model_id": "RM-COI-001",
+  "authority_mode": "DERIVED_NON_AUTHORITATIVE",
+  "concern_families": ["FH-CF-01","FH-CF-02","FH-CF-03","FH-CF-04","FH-CF-05"],
+  "generated_at": "2026-08-26T18:10:00Z",
+  "as_of": "2026-08-26T18:00:00Z",
+  "freshness_state": "CURRENT",
+  "reconciliation_state": "CURRENT",
+  "source_refs": ["RM-FUND-001","REG-INIT-LIFECYCLE-001","REG-DEC-001","REG-STR-REC-001","REG-RM-001"],
+  "source_health_refs": ["COI-HLT-RM-FUND-001"],
+  "contract_refs": ["STD-COI-001","profiles/corporate-operating-intelligence/first-horizon-contracts.v1.yaml"],
+  "derivation": {
+    "schema_version": "coi-derivation-metadata.v1",
+    "contract_version": "1.0.0",
+    "derivation_id": "COI-DER-RM-COI-001",
+    "derivation_version": "1.0.0",
+    "deterministic": true,
+    "inference": false,
+    "input_refs": ["RM-FUND-001","REG-INIT-LIFECYCLE-001","REG-DEC-001","REG-STR-REC-001","REG-RM-001"],
+    "contract_refs": ["STD-COI-001","mappings/corporate-operating-intelligence/source-fact-mapping.v1.yaml"],
+    "rule_ref": "mappings/corporate-operating-intelligence/source-fact-mapping.v1.yaml",
+    "generator_revision": "3f30f103dec884403833dfd1f4f7833122c5b284",
+    "rebuild_ref": "docs/runbooks/coi-rm-coi-001-local-operations.md",
+    "evidence_refs": ["DEC-ACC-G7-001"]
+  }
+}
