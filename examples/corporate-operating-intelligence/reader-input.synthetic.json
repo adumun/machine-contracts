@@ -1,0 +1,60 @@
+{
+  "retrieved_at": "2026-08-26T10:00:00-04:00",
+  "sources": {
+    "RM-FUND-001": {
+      "source_ref": "fixture:RM-FUND-001/Dashboard",
+      "freshness": {"state": "CURRENT", "as_of": "2026-08-26T09:00:00-04:00", "policy_ref": "REG-RM-001:RM-FUND-001"},
+      "confidentiality": {"classification": "INTERNAL"},
+      "reconciliation_state": "CURRENT",
+      "rows": [
+        ["ADÜMÜN Funding Activation Dashboard", "Value", "Interpretation"],
+        ["WHAT — Consolidated Operating Minimum (CLP/mo)", "1,000,000", "Synthetic target"],
+        ["Predictable coverage (CLP/mo)", "-", "Synthetic unevidenced coverage"],
+        ["Coverage gap (CLP/mo)", "1,000,000", "Synthetic derived gap"],
+        ["Collected cash MTD (CLP)", "-", "Synthetic unevidenced cash"]
+      ]
+    },
+    "REG-INIT-LIFECYCLE-001": {
+      "source_ref": "fixture:REG-INIT-LIFECYCLE-001/Registry",
+      "freshness": {"state": "CURRENT", "as_of": "2026-08-26T09:00:00-04:00", "policy_ref": "REG-RM-001:RM-ILS-001"},
+      "confidentiality": {"classification": "INTERNAL"},
+      "reconciliation_state": "CURRENT",
+      "rows": [
+        ["ID", "Initiative", "Lifecycle Stage", "Current Gate", "Gate Outcome", "Canonical Lifecycle State", "Portfolio Object Type", "Normalized Object ID"],
+        ["1", "Synthetic Initiative", "S8 — Delivery & Continuous Validation", "G8", "OPEN", "READY_FOR_DELIVERY", "INITIATIVE", "INIT-SYN-001"],
+        ["2", "Non Initiative", "", "", "", "", "UNRESOLVED", ""]
+      ]
+    },
+    "REG-DEC-001": {
+      "source_ref": "fixture:REG-DEC-001/Decision Registry",
+      "freshness": {"state": "UNKNOWN", "as_of": null, "policy_ref": "SOURCE_REVIEW_OR_CHANGE"},
+      "confidentiality": {"classification": "INTERNAL"},
+      "reconciliation_state": "CURRENT",
+      "rows": [
+        ["decision_id", "title", "status", "authority_mode"],
+        ["DEC-SYN-001", "Synthetic decision", "ACCEPTED", "REGISTRY_AUTHORITY"]
+      ]
+    },
+    "REG-STR-REC-001": {
+      "source_ref": "fixture:REG-STR-REC-001/Structural Register",
+      "freshness": {"state": "UNKNOWN", "as_of": null, "policy_ref": "SOURCE_REVIEW_OR_CHANGE"},
+      "confidentiality": {"classification": "INTERNAL"},
+      "reconciliation_state": "CURRENT",
+      "rows": [
+        ["object_id", "object_class", "canonical_name", "primary_owner", "parent_unit", "reconciliation_status"],
+        ["ORG-SYN-001", "BUSINESS_VERTICAL", "Synthetic Vertical", "Synthetic Vertical", "ADÜMÜN", "RECONCILED"],
+        ["INIT-SYN-001", "INITIATIVE", "Synthetic Initiative", "Synthetic Vertical", "ADÜMÜN", "RECONCILED"]
+      ]
+    },
+    "REG-RM-001": {
+      "source_ref": "fixture:REG-RM-001/Read Models",
+      "freshness": {"state": "UNKNOWN", "as_of": null, "policy_ref": "SELF"},
+      "confidentiality": {"classification": "INTERNAL"},
+      "reconciliation_state": "CURRENT",
+      "rows": [
+        ["read_model_id", "name", "authority_mode", "freshness_state", "lifecycle", "disposition"],
+        ["RM-SYN-001", "Synthetic Read Model", "DERIVED_NON_AUTHORITATIVE", "FRESH", "CURRENT", "KEEP_CURRENT"]
+      ]
+    }
+  }
+}
