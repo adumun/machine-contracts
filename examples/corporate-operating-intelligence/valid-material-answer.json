@@ -1,0 +1,21 @@
+{
+  "schema_version":"coi-material-answer.v1",
+  "contract_version":"1.0.0",
+  "answer_id":"COI-ANS-FUNDING-OPERATING-MINIMUM",
+  "concern_family":"FH-CF-01",
+  "canonical_concept":"OPERATING_MINIMUM_MONTHLY",
+  "display_label":"Operating minimum mensual",
+  "business_meaning":"Minimum monthly funding target for current operating baseline.",
+  "value_state":"KNOWN",
+  "value":3000000,
+  "unit":"CLP_PER_MONTH",
+  "semantic_class":"TARGET",
+  "authority":{"mode":"DERIVED_NON_AUTHORITATIVE","owner":"Corporate Finance","source_ref":"RM-FUND-001"},
+  "provenance":{"source_refs":["RM-FUND-001"],"derivation":"Direct governed projection from Funding WHAT baseline.","evidence_refs":["EVD-2026-0040"]},
+  "freshness":{"state":"CURRENT","as_of":"2026-08-26T08:00:00Z","policy_ref":"REG-RM-001","last_success_at":"2026-08-26T08:00:00Z"},
+  "confidentiality":{"classification":"INTERNAL","authorization_state":"ALLOWED"},
+  "limitations":[],
+  "related_refs":["INIT-ACC-001"],
+  "drill_through_ref":"RM-FUND-001",
+  "generated_at":"2026-08-26T08:00:00Z"
+}

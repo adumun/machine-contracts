@@ -1,0 +1,35 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://adumun.local/schemas/corporate-operating-intelligence/material-answer.schema.json",
+  "title":"ADÜMÜN COI Material Answer",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema_version","contract_version","answer_id","concern_family","canonical_concept","value_state","semantic_class","authority","provenance","freshness","confidentiality","generated_at"],
+  "properties":{
+    "schema_version":{"const":"coi-material-answer.v1"},
+    "contract_version":{"type":"string","pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "answer_id":{"type":"string","pattern":"^COI-ANS-[A-Z0-9][A-Z0-9._-]*$"},
+    "concern_family":{"enum":["FH-CF-01","FH-CF-02","FH-CF-03","FH-CF-04","FH-CF-05"]},
+    "canonical_concept":{"type":"string","pattern":"^[A-Z][A-Z0-9_]*$"},
+    "display_label":{"type":"string","minLength":1},
+    "business_meaning":{"type":"string","minLength":1},
+    "value_state":{"enum":["KNOWN","UNKNOWN","MISSING","STALE","RECONCILIATION_REQUIRED","RESTRICTED","NOT_APPLICABLE"]},
+    "value":{},
+    "unit":{"type":["string","null"]},
+    "semantic_class":{"type":"string","pattern":"^[A-Z][A-Z0-9_]*$"},
+    "authority":{"type":"object","additionalProperties":false,"required":["mode","owner","source_ref"],"properties":{"mode":{"enum":["SOURCE_AUTHORITY","REGISTRY_AUTHORITY","DERIVED_NON_AUTHORITATIVE","OBSERVATION","ESTIMATE","ASSUMPTION"]},"owner":{"type":"string","minLength":1},"source_ref":{"type":"string","minLength":1}}},
+    "provenance":{"type":"object","additionalProperties":false,"required":["source_refs"],"properties":{"source_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":1}},"derivation":{"type":["string","null"]},"evidence_refs":{"type":"array","uniqueItems":true,"items":{"type":"string","minLength":1}}}},
+    "freshness":{"type":"object","additionalProperties":false,"required":["state"],"properties":{"state":{"enum":["CURRENT","STALE","UNKNOWN","REVIEW_REQUIRED"]},"as_of":{"type":["string","null"],"format":"date-time"},"policy_ref":{"type":["string","null"]},"last_success_at":{"type":["string","null"],"format":"date-time"}}},
+    "confidentiality":{"type":"object","additionalProperties":false,"required":["classification","authorization_state"],"properties":{"classification":{"enum":["PUBLIC","INTERNAL","RESTRICTED","LEGAL_CONFIDENTIAL","PEOPLE_CONFIDENTIAL"]},"authorization_state":{"enum":["ALLOWED","REDACTED","RESTRICTED"]}}},
+    "limitations":{"type":"array","items":{"type":"string","minLength":1}},
+    "related_refs":{"type":"array","uniqueItems":true,"items":{"type":"string","minLength":1}},
+    "drill_through_ref":{"type":["string","null"]},
+    "generated_at":{"type":"string","format":"date-time"}
+  },
+  "allOf":[
+    {"if":{"properties":{"value_state":{"const":"KNOWN"}},"required":["value_state"]},"then":{"required":["value"]}},
+    {"if":{"properties":{"value_state":{"enum":["UNKNOWN","MISSING","RECONCILIATION_REQUIRED","RESTRICTED","NOT_APPLICABLE"]}},"required":["value_state"]},"then":{"not":{"required":["value"]}}},
+    {"if":{"properties":{"value_state":{"const":"RESTRICTED"}},"required":["value_state"]},"then":{"properties":{"confidentiality":{"properties":{"authorization_state":{"const":"RESTRICTED"}}}}}},
+    {"if":{"properties":{"value_state":{"const":"STALE"}},"required":["value_state"]},"then":{"properties":{"freshness":{"properties":{"state":{"const":"STALE"}}}}}}
+  ]
+}

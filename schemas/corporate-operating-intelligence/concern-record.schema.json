@@ -1,0 +1,28 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://adumun.local/schemas/corporate-operating-intelligence/concern-record.schema.json",
+  "title":"ADÜMÜN COI Concern Record",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema_version","contract_version","record_id","concern_family","object_type","object_id","reconciliation_state","facts"],
+  "properties":{
+    "schema_version":{"const":"coi-concern-record.v1"},
+    "contract_version":{"type":"string","pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "record_id":{"type":"string","pattern":"^COI-REC-[A-Z0-9][A-Z0-9._-]*$"},
+    "concern_family":{"enum":["FH-CF-01","FH-CF-02","FH-CF-03","FH-CF-04","FH-CF-05"]},
+    "object_type":{"type":"string","pattern":"^[A-Z][A-Z0-9_]*$"},
+    "object_id":{"type":"string","minLength":1},
+    "label":{"type":["string","null"]},
+    "reconciliation_state":{"enum":["CURRENT","RECONCILIATION_REQUIRED","UNAVAILABLE"]},
+    "facts":{"type":"array","items":{"$ref":"material-answer.schema.json"}},
+    "source_envelopes":{"type":"array","items":{"$ref":"source-envelope.schema.json"}},
+    "related_refs":{"type":"array","uniqueItems":true,"items":{"type":"string","minLength":1}}
+  },
+  "allOf":[
+    {"if":{"properties":{"concern_family":{"const":"FH-CF-01"}},"required":["concern_family"]},"then":{"properties":{"object_type":{"enum":["FUNDING_POSITION","FINANCIAL_FACT","FUNDING_TARGET","CASH_FACT"]}}}},
+    {"if":{"properties":{"concern_family":{"const":"FH-CF-02"}},"required":["concern_family"]},"then":{"properties":{"object_type":{"enum":["INITIATIVE","PORTFOLIO_ATTENTION","LIFECYCLE_STATE"]}}}},
+    {"if":{"properties":{"concern_family":{"const":"FH-CF-03"}},"required":["concern_family"]},"then":{"properties":{"object_type":{"enum":["DECISION","EXCEPTION","RISK_ACCEPTANCE","DISSENT","DECISION_ATTENTION"]}}}},
+    {"if":{"properties":{"concern_family":{"const":"FH-CF-04"}},"required":["concern_family"]},"then":{"properties":{"object_type":{"enum":["ORGANIZATIONAL_UNIT","OWNERSHIP_RELATION","STRUCTURAL_PATH"]}}}},
+    {"if":{"properties":{"concern_family":{"const":"FH-CF-05"}},"required":["concern_family"]},"then":{"properties":{"object_type":{"enum":["SOURCE_HEALTH","RECONCILIATION_ATTENTION","READ_MODEL_HEALTH"]}}}}
+  ]
+}
