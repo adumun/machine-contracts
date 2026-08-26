@@ -1,4 +1,4 @@
-registryVersion: 1.0.0
+registryVersion: 1.1.0
 schemaVersion: 1.0.0
 status: CANDIDATE
 predecessor:
@@ -95,10 +95,7 @@ contracts:
     provenance:
       evidenceStatus: EVIDENCED
       observedAt: '2026-08-24'
-      sourceRefs:
-        - STD-IGM-001
-        - evidence/TRV-014-RECONCILIATION.md
-        - profiles/initiative-governance/legacy-ils-0.2-alpha.mapping.yaml
+      sourceRefs: [STD-IGM-001, evidence/TRV-014-RECONCILIATION.md, profiles/initiative-governance/legacy-ils-0.2-alpha.mapping.yaml]
       confidence: HIGH
   - id: decision-record
     name: DecisionRecord
@@ -111,10 +108,7 @@ contracts:
     provenance:
       evidenceStatus: EVIDENCED
       observedAt: '2026-08-24'
-      sourceRefs:
-        - STD-DEC-001
-        - REG-DEC-001
-        - evidence/GAP-06-DECISION-REGISTRY.md
+      sourceRefs: [STD-DEC-001, REG-DEC-001, evidence/GAP-06-DECISION-REGISTRY.md]
       confidence: HIGH
   - id: decision-registry
     name: DecisionRegistry
@@ -127,10 +121,7 @@ contracts:
     provenance:
       evidenceStatus: EVIDENCED
       observedAt: '2026-08-24'
-      sourceRefs:
-        - STD-DEC-001
-        - REG-DEC-001
-        - evidence/GAP-06-DECISION-REGISTRY.md
+      sourceRefs: [STD-DEC-001, REG-DEC-001, evidence/GAP-06-DECISION-REGISTRY.md]
       confidence: HIGH
   - id: shipping-runtime-contracts
     name: Shipping Mode Runtime Contracts
@@ -144,4 +135,134 @@ contracts:
       evidenceStatus: EVIDENCED
       observedAt: '2026-08-22'
       sourceRefs: [cmartinezs/shipping-mode:README.md]
+      confidence: HIGH
+  - id: coi-material-answer
+    name: COI Material Answer / QuickLookupResult Semantic Envelope
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-COI-001 + BOUNDED_DOMAIN_AUTHORITIES
+    status: ACTIVE
+    successorRef: schemas/corporate-operating-intelligence/material-answer.schema.json
+    notes: Consumer-independent material answer semantics. QuickLookupResult is a presentation of this envelope, not a competing semantic authority.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-26'
+      sourceRefs: [STD-COI-001, DEC-ACC-G7-001, evidence/INIT-ACC-001-M1-contract-baseline.md]
+      confidence: HIGH
+  - id: coi-source-envelope
+    name: COI Source Envelope
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-COI-001 + BOUNDED_DOMAIN_AUTHORITIES
+    status: ACTIVE
+    successorRef: schemas/corporate-operating-intelligence/source-envelope.schema.json
+    notes: Provider-neutral source identity, authority, freshness and confidentiality envelope; source truth remains upstream.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-26'
+      sourceRefs: [STD-COI-001, DEC-ACC-G7-001]
+      confidence: HIGH
+  - id: coi-concern-record
+    name: COI Concern Record
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-COI-001
+    status: ACTIVE
+    successorRef: schemas/corporate-operating-intelligence/concern-record.schema.json
+    notes: Bounded first-horizon record envelope for FH-CF-01 through FH-CF-05.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-26'
+      sourceRefs: [STD-COI-001, DEC-ACC-G7-001]
+      confidence: HIGH
+  - id: coi-canonical-concept
+    name: COI Canonical Concept
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-COI-001 + BOUNDED_DOMAIN_AUTHORITIES
+    status: ACTIVE
+    successorRef: schemas/corporate-operating-intelligence/canonical-concept.schema.json
+    notes: Stable semantic identity contract; meaning changes require successor lineage rather than silent reinterpretation.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-26'
+      sourceRefs: [STD-COI-001, registries/corporate-operating-intelligence/concepts.v1.yaml]
+      confidence: HIGH
+  - id: coi-canonical-concept-registry
+    name: COI Canonical Concept Registry
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-COI-001 + BOUNDED_DOMAIN_AUTHORITIES
+    status: ACTIVE
+    successorRef: schemas/corporate-operating-intelligence/canonical-concept-registry.schema.json
+    notes: Registration surface for first-horizon canonical concepts and semantic stewardship.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-26'
+      sourceRefs: [STD-COI-001, registries/corporate-operating-intelligence/concepts.v1.yaml]
+      confidence: HIGH
+  - id: coi-derivation-metadata
+    name: COI Derivation Metadata
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-COI-001
+    status: ACTIVE
+    successorRef: schemas/corporate-operating-intelligence/derivation-metadata.schema.json
+    notes: Requires deterministic, non-inferential derivation with governed inputs, revision and rebuild references.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-26'
+      sourceRefs: [STD-COI-001, DEC-ACC-G7-001]
+      confidence: HIGH
+  - id: coi-source-health
+    name: COI Source Health
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-COI-001
+    status: ACTIVE
+    successorRef: schemas/corporate-operating-intelligence/source-health.schema.json
+    notes: Separates source availability, freshness and reconciliation/integrity state and explicitly prohibits substitution.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-26'
+      sourceRefs: [STD-COI-001, DEC-ACC-G7-001]
+      confidence: HIGH
+  - id: coi-read-model-metadata
+    name: COI Read-Model Metadata
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-COI-001
+    status: ACTIVE
+    successorRef: schemas/corporate-operating-intelligence/read-model-metadata.schema.json
+    notes: Reusable metadata contract for derived read models, including authority, as-of, source refs, source health, derivation and rebuildability.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-26'
+      sourceRefs: [STD-COI-001, DEC-ACC-G7-001]
+      confidence: HIGH
+  - id: coi-corporate-operating-snapshot
+    name: RM-COI-001 Corporate Operating Snapshot
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-COI-001 + BOUNDED_DOMAIN_AUTHORITIES
+    status: ACTIVE
+    successorRef: schemas/corporate-operating-intelligence/materialized-snapshot.schema.json
+    notes: Cross-domain materialized snapshot envelope. The materialization itself remains DERIVED_NON_AUTHORITATIVE and rebuildable.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-26'
+      sourceRefs: [STD-COI-001, DEC-ACC-G7-001, evidence/INIT-ACC-001-M3-materialized-read-model.md]
+      confidence: HIGH
+  - id: coi-contract-profile
+    name: COI First-Horizon Contract Governance Profile
+    version: 1.0.0
+    authorityState: ADUMUN_CANONICAL
+    semanticAuthority: STD-COI-001
+    status: ACTIVE
+    successorRef: schemas/corporate-operating-intelligence/contract-profile.schema.json
+    notes: Machine-verifiable versioning, compatibility, ownership, registration, consumer reuse and rebuildability policy for the first horizon.
+    provenance:
+      evidenceStatus: EVIDENCED
+      observedAt: '2026-08-26'
+      sourceRefs: [STD-COI-001, DEC-ACC-G7-001, profiles/corporate-operating-intelligence/first-horizon-contracts.v1.yaml]
       confidence: HIGH
