@@ -9,6 +9,10 @@
     "registryVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
     "schemaVersion": {"const": "1.0.0"},
     "status": {"enum": ["CANDIDATE", "CURRENT", "SUPERSEDED"]},
+    "predecessor": {
+      "type": "object",
+      "additionalProperties": true
+    },
     "contracts": {
       "type": "array",
       "items": {
@@ -19,7 +23,7 @@
           "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
           "name": {"type": "string", "minLength": 1},
           "version": {"type": ["string", "null"]},
-          "authorityState": {"enum": ["ADUMUN_CANONICAL", "EXTERNAL_LEGACY", "DISTRIBUTED", "RECONCILIATION_REQUIRED", "SUPERSEDED"]},
+          "authorityState": {"enum": ["ADUMUN_CANONICAL", "EXTERNAL_LEGACY", "DISTRIBUTED", "DISTRIBUTED_WITH_ENTERPRISE_CONTRACT", "RECONCILIATION_REQUIRED", "SUPERSEDED"]},
           "semanticAuthority": {"type": "string", "minLength": 1},
           "status": {"enum": ["ACTIVE", "CANDIDATE", "RECONCILIATION_REQUIRED", "DEPRECATED", "SUPERSEDED"]},
           "successorRef": {"type": ["string", "null"]},
