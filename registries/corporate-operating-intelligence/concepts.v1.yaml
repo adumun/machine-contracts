@@ -1,0 +1,261 @@
+schema_version: coi-canonical-concept-registry.v1
+contract_version: 1.0.0
+standard_ref: STD-COI-001
+initiative_id: INIT-ACC-001
+capability_id: CAP-COI-001
+concepts:
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: FUNDING_OPERATING_MINIMUM_MONTHLY
+    concern_family: FH-CF-01
+    semantic_class: TARGET
+    business_meaning: Governed monthly operating funding target; never collected cash, revenue, invoiced value, contracted value, predictable coverage or pipeline.
+    value_kind: INTEGER
+    unit_policy: REQUIRED
+    unit: CLP_PER_MONTH
+    authority_expectation: DERIVED_NON_AUTHORITATIVE
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Corporate Finance
+    status: ACTIVE
+    source_refs: [STD-COI-001, RM-FUND-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: FUNDING_PREDICTABLE_MONTHLY_COVERAGE
+    concern_family: FH-CF-01
+    semantic_class: PREDICTABLE_COVERAGE
+    business_meaning: Governed recurring or predictable monthly funding coverage; distinct from actual cash, recognized revenue, billed, contracted, pipeline and target values.
+    value_kind: INTEGER
+    unit_policy: REQUIRED
+    unit: CLP_PER_MONTH
+    authority_expectation: DERIVED_NON_AUTHORITATIVE
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Corporate Finance
+    status: ACTIVE
+    source_refs: [STD-COI-001, RM-FUND-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: FUNDING_COVERAGE_GAP_MONTHLY
+    concern_family: FH-CF-01
+    semantic_class: DERIVED_ATTENTION
+    business_meaning: Deterministic non-authoritative monthly gap signal between governed funding measures; it is not a source-authoritative financial fact.
+    value_kind: INTEGER
+    unit_policy: REQUIRED
+    unit: CLP_PER_MONTH
+    authority_expectation: DERIVED_NON_AUTHORITATIVE
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Corporate Finance
+    status: ACTIVE
+    source_refs: [STD-COI-001, RM-FUND-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: FUNDING_COLLECTED_CASH_MTD
+    concern_family: FH-CF-01
+    semantic_class: COLLECTED_CASH
+    business_meaning: Cash actually collected month-to-date as represented by the governed funding source; distinct from revenue, billed, contracted, coverage, pipeline and target.
+    value_kind: INTEGER
+    unit_policy: REQUIRED
+    unit: CLP
+    authority_expectation: DERIVED_NON_AUTHORITATIVE
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Corporate Finance
+    status: ACTIVE
+    source_refs: [STD-COI-001, RM-FUND-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: INITIATIVE_CANONICAL_LIFECYCLE_STATE
+    concern_family: FH-CF-02
+    semantic_class: LIFECYCLE_STATE
+    business_meaning: Canonical initiative lifecycle state; distinct from lifecycle stage, gate state, product readiness, capability maturity, work state and delivery state.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Strategy & Portfolio / Initiative Governance
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-INIT-LIFECYCLE-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: INITIATIVE_CURRENT_STAGE
+    concern_family: FH-CF-02
+    semantic_class: LIFECYCLE_STAGE
+    business_meaning: Current initiative lifecycle stage; not interchangeable with lifecycle state, gate outcome or any readiness/maturity/work/delivery state.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Strategy & Portfolio / Initiative Governance
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-INIT-LIFECYCLE-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: INITIATIVE_CURRENT_GATE
+    concern_family: FH-CF-02
+    semantic_class: GATE_STATE
+    business_meaning: Current governed lifecycle gate identity; distinct from lifecycle stage and canonical lifecycle state.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Strategy & Portfolio / Initiative Governance
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-INIT-LIFECYCLE-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: INITIATIVE_GATE_OUTCOME
+    concern_family: FH-CF-02
+    semantic_class: GATE_STATE
+    business_meaning: Outcome/state of the current governed lifecycle gate; absent outcome remains UNKNOWN rather than inferred from stage or lifecycle state.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Strategy & Portfolio / Initiative Governance
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-INIT-LIFECYCLE-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: DECISION_STATUS
+    concern_family: FH-CF-03
+    semantic_class: DECISION_STATUS
+    business_meaning: Governed enterprise decision status from the canonical decision registry/source; not a work or delivery state.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Governance & Audit
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-DEC-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: DECISION_AUTHORITY_MODE
+    concern_family: FH-CF-03
+    semantic_class: AUTHORITY_STATUS
+    business_meaning: Governed authority mode of a decision record; describes authority topology and does not promote a COI projection to authority.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Governance & Audit
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-DEC-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: STRUCTURAL_PRIMARY_OWNER
+    concern_family: FH-CF-04
+    semantic_class: STRUCTURAL_OWNERSHIP
+    business_meaning: Primary governed organizational owner for the bounded structural object.
+    value_kind: STRING
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Strategy & Portfolio + Governance & Audit
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-STR-REC-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: STRUCTURAL_PARENT_UNIT
+    concern_family: FH-CF-04
+    semantic_class: STRUCTURAL_OWNERSHIP
+    business_meaning: Governed parent organizational unit when recorded; absence remains explicit and is not inferred from naming or hierarchy presentation.
+    value_kind: STRING
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED, NOT_APPLICABLE]
+    stewardship_owner: Data, Knowledge & AI + Strategy & Portfolio + Governance & Audit
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-STR-REC-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: STRUCTURAL_RECONCILIATION_STATUS
+    concern_family: FH-CF-04
+    semantic_class: AUTHORITY_STATUS
+    business_meaning: Reconciliation status exposed by the governed structural register; conflicting structure is never silently repaired by COI.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Strategy & Portfolio + Governance & Audit
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-STR-REC-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: READ_MODEL_FRESHNESS_STATE
+    concern_family: FH-CF-05
+    semantic_class: SOURCE_HEALTH
+    business_meaning: Governed freshness state of a registered read model.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Governance & Audit
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-RM-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: READ_MODEL_AUTHORITY_MODE
+    concern_family: FH-CF-05
+    semantic_class: AUTHORITY_STATUS
+    business_meaning: Governed authority mode declared for a registered read model; COI materializations remain DERIVED_NON_AUTHORITATIVE.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Governance & Audit
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-RM-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: READ_MODEL_LIFECYCLE
+    concern_family: FH-CF-05
+    semantic_class: SOURCE_HEALTH
+    business_meaning: Governed lifecycle state of a registered read model as source-health/control metadata; not initiative lifecycle state.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Governance & Audit
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-RM-001]
+    evidence_refs: [DEC-ACC-G7-001]
+  - schema_version: coi-canonical-concept.v1
+    contract_version: 1.0.0
+    concept_id: READ_MODEL_DISPOSITION
+    concern_family: FH-CF-05
+    semantic_class: SOURCE_HEALTH
+    business_meaning: Governed disposition/control state of a registered read model.
+    value_kind: ENUM
+    unit_policy: FORBIDDEN
+    unit: null
+    authority_expectation: REGISTRY_AUTHORITY
+    allowed_value_states: [KNOWN, UNKNOWN, MISSING, STALE, RECONCILIATION_REQUIRED, RESTRICTED]
+    stewardship_owner: Data, Knowledge & AI + Governance & Audit
+    status: ACTIVE
+    source_refs: [STD-COI-001, REG-RM-001]
+    evidence_refs: [DEC-ACC-G7-001]
