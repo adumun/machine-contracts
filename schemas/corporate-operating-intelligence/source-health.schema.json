@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adumun.local/schemas/corporate-operating-intelligence/source-health.schema.json",
+  "title": "ADÜMÜN COI Source Health",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","contract_version","health_id","source_id","availability_state","freshness","reconciliation_state","observed_at","substitution_allowed","issue_refs","evidence_refs"],
+  "properties": {
+    "schema_version": {"const": "coi-source-health.v1"},
+    "contract_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "health_id": {"type": "string", "pattern": "^COI-HLT-[A-Z0-9][A-Z0-9._-]*$"},
+    "source_id": {"type": "string", "minLength": 1},
+    "availability_state": {"enum": ["AVAILABLE","DEGRADED","UNAVAILABLE","UNKNOWN"]},
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state","as_of","policy_ref"],
+      "properties": {
+        "state": {"enum": ["CURRENT","STALE","UNKNOWN","REVIEW_REQUIRED"]},
+        "as_of": {"type": ["string","null"], "format": "date-time"},
+        "policy_ref": {"type": ["string","null"]},
+        "last_success_at": {"type": ["string","null"], "format": "date-time"}
+      }
+    },
+    "reconciliation_state": {"enum": ["CURRENT","RECONCILIATION_REQUIRED","UNAVAILABLE"]},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "substitution_allowed": {"const": false},
+    "issue_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  },
+  "allOf": [
+    {"if": {"properties": {"availability_state": {"const": "UNAVAILABLE"}}, "required": ["availability_state"]}, "then": {"properties": {"reconciliation_state": {"enum": ["RECONCILIATION_REQUIRED","UNAVAILABLE"]}}}}
+  ]
+}
