@@ -1,0 +1,23 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://adumun.local/schemas/corporate-operating-intelligence/source-envelope.schema.json",
+  "title":"ADÜMÜN COI Source Envelope",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema_version","contract_version","source_id","concern_family","authority_mode","authority_owner","source_ref","read_only","retrieved_at","freshness","confidentiality"],
+  "properties":{
+    "schema_version":{"const":"coi-source-envelope.v1"},
+    "contract_version":{"type":"string","pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "source_id":{"type":"string","pattern":"^COI-SRC-[A-Z0-9][A-Z0-9._-]*$"},
+    "concern_family":{"enum":["FH-CF-01","FH-CF-02","FH-CF-03","FH-CF-04","FH-CF-05"]},
+    "authority_mode":{"enum":["SOURCE_AUTHORITY","REGISTRY_AUTHORITY","MIXED_REGISTRY_SOURCE_AUTHORITY","DERIVED_NON_AUTHORITATIVE"]},
+    "authority_owner":{"type":"string","minLength":1},
+    "source_ref":{"type":"string","minLength":1},
+    "read_only":{"const":true},
+    "retrieved_at":{"type":"string","format":"date-time"},
+    "freshness":{"type":"object","additionalProperties":false,"required":["state"],"properties":{"state":{"enum":["CURRENT","STALE","UNKNOWN","REVIEW_REQUIRED"]},"as_of":{"type":["string","null"],"format":"date-time"},"policy_ref":{"type":["string","null"]},"next_review_at":{"type":["string","null"],"format":"date-time"}}},
+    "confidentiality":{"type":"object","additionalProperties":false,"required":["classification"],"properties":{"classification":{"enum":["PUBLIC","INTERNAL","RESTRICTED","LEGAL_CONFIDENTIAL","PEOPLE_CONFIDENTIAL"]},"notes":{"type":["string","null"]}}},
+    "reconciliation_state":{"enum":["CURRENT","RECONCILIATION_REQUIRED","UNAVAILABLE"]},
+    "error":{"type":["string","null"]}
+  }
+}
