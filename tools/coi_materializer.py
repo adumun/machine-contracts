@@ -36,15 +36,25 @@ def _aggregate_reconciliation(statuses: list[str]) -> str:
 def _fact_index_entry(record: dict[str, Any], fact: dict[str, Any]) -> dict[str, Any]:
     entry = {
         "fact_key": f"{record['object_id']}::{fact['canonical_concept']}",
+        "answer_id": fact["answer_id"],
         "record_id": record["record_id"],
         "concern_family": record["concern_family"],
         "object_id": record["object_id"],
         "canonical_concept": fact["canonical_concept"],
+        "display_label": fact["display_label"],
         "value_state": fact["value_state"],
         "semantic_class": fact["semantic_class"],
+        "authority": copy.deepcopy(fact["authority"]),
         "authority_mode": fact["authority"]["mode"],
+        "provenance": copy.deepcopy(fact["provenance"]),
         "source_refs": list(fact["provenance"]["source_refs"]),
+        "freshness": copy.deepcopy(fact["freshness"]),
+        "confidentiality": copy.deepcopy(fact["confidentiality"]),
+        "limitations": copy.deepcopy(fact.get("limitations", [])),
+        "drill_through_ref": fact.get("drill_through_ref"),
     }
+    if "business_meaning" in fact:
+        entry["business_meaning"] = fact["business_meaning"]
     if "value" in fact:
         entry["value"] = copy.deepcopy(fact["value"])
     if "unit" in fact:
@@ -86,7 +96,7 @@ def materialize(reader_output: dict[str, Any]) -> dict[str, Any]:
 
     return {
         "schema_version": "coi-materialized-snapshot.v1",
-        "contract_version": "1.0.0",
+        "contract_version": "1.1.0",
         "read_model_id": READ_MODEL_ID,
         "name": READ_MODEL_NAME,
         "initiative_id": reader_output["initiative_id"],
@@ -122,11 +132,7 @@ def executive_briefing_projection(snapshot: dict[str, Any]) -> dict[str, Any]:
 
 
 def static_view_projection(snapshot: dict[str, Any], concern_family: str) -> list[dict[str, Any]]:
-    return [
-        copy.deepcopy(item)
-        for item in snapshot["fact_index"]
-        if item["concern_family"] == concern_family
-    ]
+    return [copy.deepcopy(item) for item in snapshot["fact_index"] if item["concern_family"] == concern_family]
 
 
 def main() -> int:
@@ -134,7 +140,6 @@ def main() -> int:
     parser.add_argument("input", type=Path, help="M2 coi-reader-output.v1 JSON")
     parser.add_argument("-o", "--output", type=Path)
     args = parser.parse_args()
-
     reader_output = json.loads(args.input.read_text(encoding="utf-8"))
     snapshot = materialize(reader_output)
     rendered = json.dumps(snapshot, ensure_ascii=False, indent=2) + "\n"
