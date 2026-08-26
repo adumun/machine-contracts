@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adumun.local/schemas/corporate-operating-intelligence/contract-profile.schema.json",
+  "title": "ADÜMÜN COI First-Horizon Contract Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","contract_version","standard_ref","decision_ref","initiative_id","capability_id","scope","principles","consumer_contracts","contract_inventory","versioning","compatibility","ownership","registration","rebuildability","required_semantic_partitions"],
+  "properties": {
+    "schema_version": {"const": "coi-contract-profile.v1"},
+    "contract_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "standard_ref": {"const": "STD-COI-001"},
+    "decision_ref": {"const": "DEC-ACC-G7-001"},
+    "initiative_id": {"const": "INIT-ACC-001"},
+    "capability_id": {"const": "CAP-COI-001"},
+    "scope": {"const": "FIRST_HORIZON_READ_MODEL_AGENT_FIRST"},
+    "principles": {
+      "type": "object", "additionalProperties": false,
+      "required": ["consumer_independent_semantics","provider_neutral","file_json_first","derived_authority","fail_closed_unknowns","semantic_inference"],
+      "properties": {
+        "consumer_independent_semantics": {"const": true},
+        "provider_neutral": {"const": true},
+        "file_json_first": {"const": true},
+        "derived_authority": {"const": "DERIVED_NON_AUTHORITATIVE"},
+        "fail_closed_unknowns": {"const": true},
+        "semantic_inference": {"const": "PROHIBITED"}
+      }
+    },
+    "consumer_contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["QuickLookupResult","ExecutiveSnapshot","EvidenceTrace"],
+      "properties": {
+        "QuickLookupResult": {"const": "schemas/corporate-operating-intelligence/material-answer.schema.json"},
+        "ExecutiveSnapshot": {"const": "schemas/corporate-operating-intelligence/materialized-snapshot.schema.json"},
+        "EvidenceTrace": {"const": "schemas/corporate-operating-intelligence/material-answer.schema.json#provenance"}
+      }
+    },
+    "contract_inventory": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id","path","version","authority_state"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "path": {"type": "string", "minLength": 1},
+          "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+          "authority_state": {"const": "ADUMUN_CANONICAL"}
+        }
+      }
+    },
+    "versioning": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scheme","patch","minor","major","breaking_requires_migration","lineage_required"],
+      "properties": {
+        "scheme": {"const": "SEMVER"},
+        "patch": {"const": "NO_ACCEPTED_INSTANCE_SEMANTIC_CHANGE"},
+        "minor": {"const": "BACKWARD_COMPATIBLE_ADDITION"},
+        "major": {"const": "BREAKING_STRUCTURAL_OR_SEMANTIC_CHANGE"},
+        "breaking_requires_migration": {"const": true},
+        "lineage_required": {"const": true}
+      }
+    },
+    "compatibility": {
+      "type": "object", "additionalProperties": false,
+      "required": ["structural_and_semantic","unknown_vocab","provider_mapping_semantic_override","silent_reinterpretation"],
+      "properties": {
+        "structural_and_semantic": {"const": true},
+        "unknown_vocab": {"const": "FAIL_CLOSED"},
+        "provider_mapping_semantic_override": {"const": "PROHIBITED"},
+        "silent_reinterpretation": {"const": "PROHIBITED"}
+      }
+    },
+    "ownership": {
+      "type": "object", "additionalProperties": false,
+      "required": ["delivery_owner","semantic_stewardship","assurance","machine_contract_home","human_semantic_home","source_truth_authority"],
+      "properties": {
+        "delivery_owner": {"const": "Corporate Technology & Platform"},
+        "semantic_stewardship": {"const": "Data, Knowledge & AI + bounded domain authority"},
+        "assurance": {"const": "Governance & Audit"},
+        "machine_contract_home": {"const": "adumun/machine-contracts"},
+        "human_semantic_home": {"const": "adumun/governance:STD-COI-001"},
+        "source_truth_authority": {"const": "BOUNDED_AUTHORITATIVE_SOURCES"}
+      }
+    },
+    "registration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["contract_authority_index","canonical_concept_registry","registration_required"],
+      "properties": {
+        "contract_authority_index": {"const": "registries/contract-authority-index.yaml"},
+        "canonical_concept_registry": {"const": "registries/corporate-operating-intelligence/concepts.v1.yaml"},
+        "registration_required": {"const": true}
+      }
+    },
+    "rebuildability": {
+      "type": "object", "additionalProperties": false,
+      "required": ["derived_read_models_disposable","deterministic","inference","input_refs_required","generator_revision_required","rebuild_ref_required","exact_revision_local_validation","paid_actions_required"],
+      "properties": {
+        "derived_read_models_disposable": {"const": true},
+        "deterministic": {"const": true},
+        "inference": {"const": false},
+        "input_refs_required": {"const": true},
+        "generator_revision_required": {"const": true},
+        "rebuild_ref_required": {"const": true},
+        "exact_revision_local_validation": {"const": true},
+        "paid_actions_required": {"const": false}
+      }
+    },
+    "required_semantic_partitions": {
+      "type": "object", "additionalProperties": false,
+      "required": ["finance","state_dimensions"],
+      "properties": {
+        "finance": {"type": "array", "minItems": 8, "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"}},
+        "state_dimensions": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"}}
+      }
+    }
+  }
+}
