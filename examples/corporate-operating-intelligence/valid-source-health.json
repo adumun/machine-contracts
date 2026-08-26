@@ -1,0 +1,19 @@
+{
+  "schema_version": "coi-source-health.v1",
+  "contract_version": "1.0.0",
+  "health_id": "COI-HLT-RM-FUND-001",
+  "source_id": "RM-FUND-001",
+  "availability_state": "AVAILABLE",
+  "freshness": {
+    "state": "CURRENT",
+    "as_of": "2026-08-26T18:00:00Z",
+    "policy_ref": "REG-RM-001:RM-FUND-001",
+    "last_success_at": "2026-08-26T18:05:00Z"
+  },
+  "reconciliation_state": "CURRENT",
+  "observed_at": "2026-08-26T18:05:00Z",
+  "substitution_allowed": false,
+  "issue_refs": [],
+  "evidence_refs": ["DEC-ACC-G7-001"],
+  "limitations": []
+}
