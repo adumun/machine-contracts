@@ -58,6 +58,20 @@
           {"if": {"properties": {"value_state": {"enum": ["UNKNOWN","MISSING","RECONCILIATION_REQUIRED","RESTRICTED","NOT_APPLICABLE"]}}, "required": ["value_state"]}, "then": {"not": {"required": ["value"]}}}
         ]
       }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version","contract_version","generated_at","authority_mode","portfolio","initiative_evidence","limitations"],
+      "properties": {
+        "schema_version": {"const": "coi-coverage-extension.v1"},
+        "contract_version": {"const": "1.0.0"},
+        "generated_at": {"type": "string", "format": "date-time"},
+        "authority_mode": {"const": "DERIVED_NON_AUTHORITATIVE"},
+        "portfolio": {"type": "object"},
+        "initiative_evidence": {"type": "object"},
+        "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
     }
   }
 }
