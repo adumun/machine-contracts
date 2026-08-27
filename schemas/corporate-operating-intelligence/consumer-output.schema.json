@@ -7,13 +7,13 @@
   "properties": {
     "schema_version": {"const": "coi-consumer-output.v1"},
     "contract_version": {"type": "string"},
-    "consumer_type": {"enum": ["QUICK_LOOKUP","EXECUTIVE_SNAPSHOT","EVIDENCE_TRACE"]},
+    "consumer_type": {"enum": ["QUICK_LOOKUP","EXECUTIVE_SNAPSHOT","EVIDENCE_TRACE","PORTFOLIO_PROGRESS","INITIATIVE_EVIDENCE"]},
     "read_model_id": {"const": "RM-COI-001"},
     "snapshot_as_of": {"type": "string", "format": "date-time"},
     "snapshot_freshness_state": {"enum": ["CURRENT","STALE","UNKNOWN","REVIEW_REQUIRED"]},
     "snapshot_reconciliation_state": {"enum": ["CURRENT","RECONCILIATION_REQUIRED","UNAVAILABLE"]},
     "authority_mode": {"const": "DERIVED_NON_AUTHORITATIVE"},
-    "status": {"enum": ["FOUND","NOT_FOUND","AVAILABLE","UNAVAILABLE"]},
+    "status": {"enum": ["FOUND","NOT_FOUND","AVAILABLE","PARTIAL","UNAVAILABLE"]},
     "limitations": {"type": "array", "items": {"type": "string"}},
     "query": {"type": "object"},
     "fact": {"type": ["object","null"]},
@@ -23,7 +23,12 @@
     "fact_count": {"type": "integer", "minimum": 0},
     "attention_count": {"type": "integer", "minimum": 0},
     "sections": {"type": "object"},
-    "attention": {"type": "array"}
+    "attention": {"type": "array"},
+    "portfolio": {"type": ["object","null"]},
+    "most_advanced": {"type": ["object","null"]},
+    "initiative_id": {"type": "string"},
+    "evidence_count": {"type": "integer", "minimum": 0},
+    "evidence": {"type": "array"}
   },
   "additionalProperties": false
 }

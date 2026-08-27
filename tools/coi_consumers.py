@@ -13,7 +13,7 @@ CONSUMER_AUTHORITY = "DERIVED_NON_AUTHORITATIVE"
 def _base(snapshot: dict[str, Any], consumer_type: str) -> dict[str, Any]:
     return {
         "schema_version": "coi-consumer-output.v1",
-        "contract_version": "1.0.0",
+        "contract_version": "1.1.0",
         "consumer_type": consumer_type,
         "read_model_id": snapshot["read_model_id"],
         "snapshot_as_of": snapshot["as_of"],
@@ -84,6 +84,63 @@ def evidence_trace(snapshot: dict[str, Any], fact_key: str) -> dict[str, Any]:
     return result
 
 
+def portfolio_progress(snapshot: dict[str, Any]) -> dict[str, Any]:
+    result = _base(snapshot, "PORTFOLIO_PROGRESS")
+    coverage = snapshot.get("coverage")
+    if not coverage:
+        result.update({
+            "status": "UNAVAILABLE",
+            "portfolio": None,
+            "most_advanced": None,
+            "limitations": ["M6_R2_COVERAGE_NOT_PRESENT"],
+        })
+        return result
+    portfolio = copy.deepcopy(coverage["portfolio"])
+    comparable = portfolio.get("comparable_initiatives", [])
+    most_advanced = comparable[0] if comparable and comparable[0].get("progress_rank") is not None else None
+    limitations = list(portfolio.get("limitations", []))
+    if most_advanced is not None:
+        limitations.append("LIFECYCLE_PROGRESSION_IS_NOT_BUSINESS_VALUE_OR_SUCCESS_RANKING")
+    result.update({
+        "status": portfolio.get("status", "UNAVAILABLE"),
+        "portfolio": portfolio,
+        "most_advanced": most_advanced,
+        "limitations": sorted(set(limitations)),
+    })
+    return result
+
+
+def initiative_evidence(snapshot: dict[str, Any], initiative_id: str) -> dict[str, Any]:
+    result = _base(snapshot, "INITIATIVE_EVIDENCE")
+    result["initiative_id"] = initiative_id
+    coverage = snapshot.get("coverage")
+    if not coverage:
+        result.update({
+            "status": "UNAVAILABLE",
+            "evidence_count": 0,
+            "evidence": [],
+            "limitations": ["M6_R2_COVERAGE_NOT_PRESENT"],
+        })
+        return result
+    inventory = coverage["initiative_evidence"]
+    if initiative_id not in inventory.get("by_initiative", {}):
+        result.update({
+            "status": "NOT_FOUND",
+            "evidence_count": 0,
+            "evidence": [],
+            "limitations": ["INITIATIVE_NOT_PRESENT_IN_COMPARABLE_PORTFOLIO_COVERAGE"],
+        })
+        return result
+    evidence = copy.deepcopy(inventory["by_initiative"].get(initiative_id, []))
+    result.update({
+        "status": "FOUND" if evidence else "NOT_FOUND",
+        "evidence_count": len(evidence),
+        "evidence": evidence,
+        "limitations": [] if evidence else ["NO_LINKED_EVIDENCE_PRESENT"],
+    })
+    return result
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Consume RM-COI-001 without touching authoritative sources.")
     parser.add_argument("snapshot", type=Path)
@@ -93,13 +150,20 @@ def main() -> int:
     lookup.add_argument("canonical_concept")
     trace = sub.add_parser("trace")
     trace.add_argument("fact_key")
+    evidence = sub.add_parser("initiative-evidence")
+    evidence.add_argument("initiative_id")
     sub.add_parser("executive")
+    sub.add_parser("portfolio")
     args = parser.parse_args()
     snapshot = json.loads(args.snapshot.read_text(encoding="utf-8"))
     if args.command == "lookup":
         output = quick_lookup(snapshot, args.object_id, args.canonical_concept)
     elif args.command == "trace":
         output = evidence_trace(snapshot, args.fact_key)
+    elif args.command == "portfolio":
+        output = portfolio_progress(snapshot)
+    elif args.command == "initiative-evidence":
+        output = initiative_evidence(snapshot, args.initiative_id)
     else:
         output = executive_snapshot(snapshot)
     print(json.dumps(output, ensure_ascii=False, indent=2))
