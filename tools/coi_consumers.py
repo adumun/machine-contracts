@@ -132,11 +132,20 @@ def initiative_evidence(snapshot: dict[str, Any], initiative_id: str) -> dict[st
         })
         return result
     evidence = copy.deepcopy(inventory["by_initiative"].get(initiative_id, []))
+    limitations = list(inventory.get("limitations", []))
+    source_reconciliation = inventory.get("source", {}).get("reconciliation_state", "CURRENT")
+    if source_reconciliation != "CURRENT":
+        limitations.append("EVIDENCE_SOURCE_NOT_FULLY_RECONCILED")
+    if not evidence:
+        limitations.append("NO_LINKED_EVIDENCE_PRESENT")
+    status = "NOT_FOUND"
+    if evidence:
+        status = "PARTIAL" if source_reconciliation != "CURRENT" else "FOUND"
     result.update({
-        "status": "FOUND" if evidence else "NOT_FOUND",
+        "status": status,
         "evidence_count": len(evidence),
         "evidence": evidence,
-        "limitations": [] if evidence else ["NO_LINKED_EVIDENCE_PRESENT"],
+        "limitations": sorted(set(limitations)),
     })
     return result
 

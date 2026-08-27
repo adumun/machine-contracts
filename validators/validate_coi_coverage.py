@@ -68,7 +68,7 @@ def coverage_bundle() -> dict:
             "source_ref": "Evidence Registry / Evidence Registry",
             "freshness": {"state": "CURRENT", "as_of": "2026-08-27"},
             "confidentiality": {"classification": "INTERNAL"},
-            "reconciliation_state": "CURRENT",
+            "reconciliation_state": "PARTIAL",
             "rows": [
                 evidence_headers,
                 ["EVD-1", "A validation passed", "2026-08-26", "2026-08-26", "INIT-A / S8", "Delivery milestone evidence", "src", "Initiative delivery evidence", "INIT-A / CAP-X", "Passed bounded validation", "Milestone supported", "SUPPORTS", "DIRECT", "HIGH", "direct", "scope", "none", "", "DEC-A", "CONFIRMS", "", "owner", "review", "DELIVERING", "artifact-a", "", "CURRENT", "evidence-registry.v1", "", ""],
@@ -125,11 +125,14 @@ def main() -> int:
     if "PORTFOLIO_POPULATION_NOT_FULLY_COMPARABLE" not in portfolio_output["limitations"]:
         print("ERROR portfolio coverage limitation was lost")
         return 1
-    if evidence_output["status"] != "FOUND" or evidence_output["evidence_count"] != 2:
-        print("ERROR initiative evidence inventory did not preserve exact linked evidence")
+    if evidence_output["status"] != "PARTIAL" or evidence_output["evidence_count"] != 2:
+        print("ERROR partial initiative evidence inventory status was not preserved")
         return 1
     if {item["evidence_id"] for item in evidence_output["evidence"]} != {"EVD-1", "EVD-2"}:
         print("ERROR unrelated evidence leaked into initiative evidence inventory")
+        return 1
+    if "EVIDENCE_SOURCE_NOT_FULLY_RECONCILED" not in evidence_output["limitations"]:
+        print("ERROR partial evidence source limitation was lost")
         return 1
 
     raw = json.dumps(enriched, ensure_ascii=False)
@@ -143,6 +146,7 @@ def main() -> int:
     print("PASS: unresolved portfolio rows prevent false global ranking")
     print("PASS: lifecycle progression ranking is deterministic and explicitly bounded")
     print("PASS: initiative evidence inventory preserves exact registry-linked evidence only")
+    print("PASS: partial evidence source state propagates to consumer status/limitations")
     print("PASS: portfolio/evidence consumers remain DERIVED_NON_AUTHORITATIVE")
     print("PASS: no ETA, completion percentage, DB, runtime, UI or writeback is introduced")
     return 0
