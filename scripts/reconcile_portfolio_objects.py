@@ -68,8 +68,16 @@ def reconcile_record(record: dict[str, Any], policy: dict[str, Any]) -> dict[str
             missing_material = True
             reasons.append(f"AUTHORITATIVE_CLAIM_MISSING:{field}")
 
+    # Fail closed on identity/classification gaps before considering any other
+    # otherwise-resolved lifecycle changes. Without both authoritative
+    # portfolio object type and normalized object ID, the reconciler cannot
+    # safely target a governed registry object.
     if conflict:
         disposition = "CONFLICT"
+        proposed = {}
+    elif missing_material:
+        proposed = {}
+        disposition = "INSUFFICIENT_EVIDENCE"
     else:
         material_changes = {
             k: v for k, v in proposed.items()
@@ -79,9 +87,6 @@ def reconcile_record(record: dict[str, Any], policy: dict[str, Any]) -> dict[str
             proposed = material_changes
             disposition = "REQUIRES_GOVERNANCE"
             reasons.append("MATERIAL_REGISTRY_CHANGE_REQUIRES_GOVERNANCE")
-        elif missing_material:
-            proposed = {}
-            disposition = "INSUFFICIENT_EVIDENCE"
         else:
             proposed = {}
             disposition = "NO_CHANGE"
