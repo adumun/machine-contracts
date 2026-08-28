@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adumun.dev/schemas/coi/portfolio-reconciliation-proposal.schema.json",
+  "title": "COI Portfolio Reconciliation Proposal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "contract_version", "generated_at", "authority_mode", "mode", "summary", "proposals"],
+  "properties": {
+    "schema_version": {"const": "coi-portfolio-reconciliation-proposal.v1"},
+    "contract_version": {"const": "1.0.0"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "authority_mode": {"const": "DERIVED_NON_AUTHORITATIVE"},
+    "mode": {"const": "PROPOSAL_ONLY"},
+    "source_snapshot_ref": {"type": ["string", "null"]},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["objects_scanned", "requires_governance", "insufficient_evidence", "conflicts", "no_change"],
+      "properties": {
+        "objects_scanned": {"type": "integer", "minimum": 0},
+        "requires_governance": {"type": "integer", "minimum": 0},
+        "insufficient_evidence": {"type": "integer", "minimum": 0},
+        "conflicts": {"type": "integer", "minimum": 0},
+        "no_change": {"type": "integer", "minimum": 0}
+      }
+    },
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_row_id", "label", "disposition", "current", "proposed", "reasons", "evidence_refs"],
+        "properties": {
+          "source_row_id": {"type": "string", "minLength": 1},
+          "label": {"type": "string", "minLength": 1},
+          "disposition": {"enum": ["NO_CHANGE", "REQUIRES_GOVERNANCE", "INSUFFICIENT_EVIDENCE", "CONFLICT"]},
+          "current": {"type": "object"},
+          "proposed": {"type": "object"},
+          "reasons": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        }
+      }
+    }
+  }
+}
