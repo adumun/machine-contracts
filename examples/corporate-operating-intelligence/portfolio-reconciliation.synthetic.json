@@ -1,0 +1,62 @@
+{
+  "retrieved_at": "2026-08-28T14:00:00-04:00",
+  "source_snapshot_ref": "synthetic://coi-portfolio-reconciliation-r1",
+  "objects": [
+    {
+      "source_row_id": "31",
+      "label": "Nexus Community Ecosystem",
+      "current": {
+        "portfolio_object_type": "UNRESOLVED",
+        "normalized_object_id": "",
+        "canonical_lifecycle_state": "DISCOVERING",
+        "lifecycle_stage": "DISCOVERING",
+        "current_gate": "G1",
+        "gate_outcome": "CONTINUE_DISCOVERY"
+      },
+      "claims": [
+        {"claim_type": "PORTFOLIO_OBJECT_TYPE", "value": "INITIATIVE", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://nexus/object-type"},
+        {"claim_type": "NORMALIZED_OBJECT_ID", "value": "INIT-NCS-001", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://nexus/id"},
+        {"claim_type": "CANONICAL_LIFECYCLE_STATE", "value": "DISCOVERING", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://nexus/lifecycle"},
+        {"claim_type": "CURRENT_GATE", "value": "G1", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://nexus/lifecycle"}
+      ]
+    },
+    {
+      "source_row_id": "38",
+      "label": "UNLOCKED",
+      "current": {"portfolio_object_type": "UNRESOLVED", "normalized_object_id": ""},
+      "claims": [
+        {"claim_type": "CANONICAL_LIFECYCLE_STATE", "value": "DISCOVERING", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://unlocked/lifecycle"}
+      ]
+    },
+    {
+      "source_row_id": "39",
+      "label": "Rent a Car Management System",
+      "current": {"portfolio_object_type": "UNRESOLVED", "normalized_object_id": ""},
+      "claims": [
+        {"claim_type": "PORTFOLIO_OBJECT_TYPE", "value": "INITIATIVE", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://rentacar/a"},
+        {"claim_type": "PORTFOLIO_OBJECT_TYPE", "value": "EXPERIMENT", "authority_mode": "SOURCE_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://rentacar/b"},
+        {"claim_type": "NORMALIZED_OBJECT_ID", "value": "INIT-RAC-001", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://rentacar/id"}
+      ]
+    },
+    {
+      "source_row_id": "40",
+      "label": "ADÜMÜN Control Center",
+      "current": {
+        "portfolio_object_type": "INITIATIVE",
+        "normalized_object_id": "INIT-ACC-001",
+        "canonical_lifecycle_state": "OPERATING",
+        "lifecycle_stage": "S10 — Operation, Support, Maintenance & Warranty",
+        "current_gate": "G10",
+        "gate_outcome": "OPEN"
+      },
+      "claims": [
+        {"claim_type": "PORTFOLIO_OBJECT_TYPE", "value": "INITIATIVE", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://acc/registry"},
+        {"claim_type": "NORMALIZED_OBJECT_ID", "value": "INIT-ACC-001", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://acc/registry"},
+        {"claim_type": "CANONICAL_LIFECYCLE_STATE", "value": "OPERATING", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://acc/registry"},
+        {"claim_type": "LIFECYCLE_STAGE", "value": "S10 — Operation, Support, Maintenance & Warranty", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://acc/registry"},
+        {"claim_type": "CURRENT_GATE", "value": "G10", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://acc/registry"},
+        {"claim_type": "GATE_OUTCOME", "value": "OPEN", "authority_mode": "REGISTRY_AUTHORITY", "authority_state": "CURRENT", "source_ref": "synthetic://acc/registry"}
+      ]
+    }
+  ]
+}
