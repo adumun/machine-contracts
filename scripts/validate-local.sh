@@ -38,7 +38,6 @@ if [[ ! -x "$VENV_PY" ]]; then
   exit 2
 fi
 
-# Install only when imports are missing. This keeps repeat runs fast and offline-friendly.
 if ! "$VENV_PY" -c 'import jsonschema, referencing, yaml' >/dev/null 2>&1; then
   echo "Installing validation dependencies from $REQ_FILE"
   "$VENV_PY" -m pip install --upgrade pip
@@ -56,6 +55,7 @@ VALIDATORS=(
   validators.validate_coi_consumers
   validators.validate_coi_operability
   validators.validate_coi_coverage
+  validators.validate_coi_portfolio_reconciliation
 )
 
 passed=0
