@@ -1,0 +1,35 @@
+schema_version: coi-portfolio-reconciliation-policy.v1
+contract_version: 1.0.0
+initiative_id: INIT-ACC-001
+mode: PROPOSAL_ONLY
+owner: Strategy & Portfolio / Initiative Governance
+consumer_authority: DERIVED_NON_AUTHORITATIVE
+rules:
+  - id: PR-01
+    statement: Never classify a portfolio object by heuristic, naming convention, repository existence, or lifecycle stage alone.
+  - id: PR-02
+    statement: A proposed Portfolio Object Type requires exactly one non-conflicting CURRENT authoritative claim for that field.
+  - id: PR-03
+    statement: A proposed Normalized Object ID requires exactly one non-conflicting CURRENT authoritative claim for that field.
+  - id: PR-04
+    statement: Lifecycle Stage, Canonical Lifecycle State, Current Gate and Gate Outcome are copied only from explicit CURRENT authoritative claims; they are never inferred from repository activity.
+  - id: PR-05
+    statement: Conflicting authoritative claims produce CONFLICT and require governance.
+  - id: PR-06
+    statement: Missing material claims produce INSUFFICIENT_EVIDENCE; absence is never converted into a value.
+  - id: PR-07
+    statement: R1 never mutates authoritative registries. Every material classification or identity change is REQUIRES_GOVERNANCE.
+authoritative_modes:
+  - SOURCE_AUTHORITY
+  - REGISTRY_AUTHORITY
+accepted_authority_states:
+  - CURRENT
+forbidden_auto_semantics:
+  - business_value
+  - success_probability
+  - strategic_priority
+  - completion_percent
+  - eta
+  - revenue_forecast
+  - inferred_lifecycle
+safe_apply_enabled: false
