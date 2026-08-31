@@ -1,0 +1,45 @@
+schema_version: 1
+suite_id: MC-CONFORMANCE-CORE-001
+name: ADUMUN Machine Contracts core conformance fixtures
+toolkit_version: 0.1.0
+purpose: >-
+  Execute deterministic positive and negative fixtures against the reusable core validator.
+  This suite proves validator behavior for the represented contract families; it does not
+  by itself certify full conformance with every normative requirement of the standards.
+cases:
+  - id: WORK-VALID-001
+    path: examples/valid/work-item.task.json
+    schema: work-item
+    expected: valid
+  - id: WORK-INVALID-DONE-EVIDENCE-001
+    path: examples/invalid/work-item.done-without-evidence.json
+    schema: work-item
+    expected: invalid
+  - id: WORKFLOW-VALID-001
+    path: examples/valid/workflow.stage-s7.json
+    schema: workflow-contract
+    expected: valid
+  - id: WORKFLOW-INVALID-CONDITIONAL-001
+    path: examples/invalid/workflow.conditional-without-condition.json
+    schema: workflow-contract
+    expected: invalid
+  - id: WORKFLOW-INVALID-STAGE-001
+    path: examples/invalid/workflow.unknown-stage.json
+    schema: workflow-contract
+    expected: invalid
+  - id: PROVIDER-GITHUB-VALID-001
+    path: mappings/github/work-item.v0.1.yaml
+    schema: provider-mapping
+    expected: valid
+  - id: PROVIDER-JIRA-VALID-001
+    path: mappings/jira/work-item.v0.1.yaml
+    schema: provider-mapping
+    expected: valid
+  - id: PROVIDER-MAPPING-INVALID-OVERRIDE-001
+    path: examples/invalid/provider-mapping.semantic-override.yaml
+    schema: provider-mapping
+    expected: invalid
+  - id: PROVIDER-CONFIG-INVALID-BINDING-001
+    path: examples/invalid/provider-config.bound-without-target-id.yaml
+    schema: provider-config
+    expected: invalid
