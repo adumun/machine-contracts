@@ -1,0 +1,35 @@
+schema_version: 1
+artifact_id: adumun-machine-contracts-toolkit
+name: ADUMUN Machine Contracts Validation Toolkit
+version: 0.1.0
+release_state: UNRELEASED
+repository: adumun/machine-contracts
+artifact_kind: reusable-validator-toolkit
+assurance_state: EVALUATED
+preferred: false
+standards:
+  STD-MC-001@1.0.0: PARTIAL
+  STD-IGM-001@1.0.0: PARTIAL
+  STD-DEC-001@1.0.0: PARTIAL
+  STD-RM-001@1.0.0: PARTIAL
+  STD-WCT-001@1.0.0: REFERENCE
+  STD-WMS-001@1.1.0: REFERENCE
+  STD-WMS-TYPES-001@1.0.0: REFERENCE
+  STD-EVID-001@1.0.0: REFERENCE
+surfaces:
+  validator_entrypoint: validators/validate.py
+  core_conformance_runner: conformance/run.py
+  core_fixture_suite: conformance/core-fixtures.yaml
+  local_gate: scripts/validate-local.sh
+  communication_contract_runner: conformance/communication/contract_test.py
+assurance:
+  source_revision_traceability: repository_commit_required_at_release
+  immutable_release_identity: required_before_VERIFIED
+  digest_or_checksum: required_before_VERIFIED
+  signature_or_attestation: SHOULD_WHEN_FEASIBLE
+  independent_conformance_review: required_before_PREFERRED
+limitations:
+  - no FULL or CERTIFIED coverage is claimed
+  - no immutable release or signed artifact exists yet
+  - COI-specific tooling is excluded from generic toolkit authority
+  - normative semantics remain owned by the Standards repository
