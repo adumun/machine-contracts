@@ -7,6 +7,7 @@ cd "$ROOT_DIR"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 VENV_DIR="${VENV_DIR:-.venv}"
 REQ_FILE="requirements-validation.txt"
+STANDARDS_ROOT="${STANDARDS_ROOT:-}"
 
 printf '\n== ADÜMÜN machine-contracts local validation ==\n'
 printf 'Repository: %s\n' "$ROOT_DIR"
@@ -48,6 +49,9 @@ fi
 
 export PYTHONPATH="$ROOT_DIR${PYTHONPATH:+:$PYTHONPATH}"
 
+printf '\n-- core contract conformance fixtures --\n'
+"$VENV_PY" conformance/run.py
+
 VALIDATORS=(
   validators.validate_coi_source_mapping
   validators.validate_coi_readers
@@ -66,5 +70,14 @@ for validator in "${VALIDATORS[@]}"; do
   passed=$((passed + 1))
 done
 
-printf '\nPASS: %d/%d validation modules completed successfully.\n' "$passed" "${#VALIDATORS[@]}"
-printf 'Local validation evidence is complete; GitHub Actions are not required.\n\n'
+if [[ -n "$STANDARDS_ROOT" ]]; then
+  printf '\n-- communication standards fixture conformance --\n'
+  "$VENV_PY" conformance/communication/contract_test.py \
+    --standards-root "$STANDARDS_ROOT" \
+    --suite conformance/communication/example-suite.yaml
+else
+  printf '\nCommunication conformance: SKIPPED (set STANDARDS_ROOT to a checkout of adumun/platform-standards).\n'
+fi
+
+printf '\nPASS: core conformance plus %d/%d specialized validation modules completed successfully.\n' "$passed" "${#VALIDATORS[@]}"
+printf 'Local validation evidence is complete for executed gates; GitHub Actions are not required.\n\n'
