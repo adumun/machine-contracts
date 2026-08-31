@@ -55,6 +55,7 @@ VALIDATORS=(
   validators.validate_coi_consumers
   validators.validate_coi_operability
   validators.validate_coi_coverage
+  validators.validate_coi_project_pulse_component
   validators.validate_coi_portfolio_reconciliation
 )
 

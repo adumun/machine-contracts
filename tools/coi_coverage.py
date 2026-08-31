@@ -49,6 +49,21 @@ def _exact_link(value: Any, initiative_id: str) -> bool:
     return re.search(rf"(?<![A-Z0-9_-]){re.escape(initiative_id)}(?![A-Z0-9_-])", text) is not None
 
 
+def _is_governed_non_initiative(row: dict[str, Any]) -> bool:
+    """Return True only for explicitly classified, current, mapped non-initiative objects.
+
+    These rows are governed portfolio/application objects, but they are outside the
+    lifecycle-progression population because COI portfolio progression compares
+    INITIATIVE objects only. They must not make that initiative population look
+    incomplete merely because a component/application/experiment is represented in
+    the same registry.
+    """
+    object_type = str(row.get("Portfolio Object Type") or "").strip()
+    reconciliation = str(row.get("Reconciliation Status") or "").strip()
+    authority_state = str(row.get("Authority State") or "").strip()
+    return bool(object_type) and object_type != "INITIATIVE" and reconciliation == "MAPPED" and authority_state == "CURRENT"
+
+
 def build_portfolio_coverage(source: dict[str, Any]) -> dict[str, Any]:
     headers, rows = _rows_to_dicts(source.get("rows", []))
     required = {
@@ -70,6 +85,7 @@ def build_portfolio_coverage(source: dict[str, Any]) -> dict[str, Any]:
             "source": _source_meta(source),
             "comparable_initiatives": [],
             "non_comparable_row_count": len(rows),
+            "excluded_non_initiative_row_count": 0,
             "global_comparison_supported": False,
             "ranking_basis": "CANONICAL_LIFECYCLE_PROGRESSION_ONLY",
             "limitations": ["SOURCE_SCHEMA_DRIFT:" + ",".join(missing)],
@@ -77,19 +93,25 @@ def build_portfolio_coverage(source: dict[str, Any]) -> dict[str, Any]:
 
     comparable: list[dict[str, Any]] = []
     non_comparable = 0
+    excluded_non_initiative = 0
     for row in rows:
         object_type = str(row.get("Portfolio Object Type") or "").strip()
         object_id = str(row.get("Normalized Object ID") or "").strip()
         lifecycle_state = str(row.get("Canonical Lifecycle State") or "").strip()
         reconciliation = str(row.get("Reconciliation Status") or "").strip()
         authority_state = str(row.get("Authority State") or "").strip()
-        if (
-            object_type == "INITIATIVE"
-            and object_id
-            and lifecycle_state
-            and reconciliation == "MAPPED"
-            and authority_state == "CURRENT"
-        ):
+
+        if object_type != "INITIATIVE":
+            if _is_governed_non_initiative(row):
+                excluded_non_initiative += 1
+            else:
+                # Unresolved, stale, unmapped or authority-uncertain rows still
+                # represent an incomplete portfolio identity population and remain
+                # fail-closed for global initiative comparison.
+                non_comparable += 1
+            continue
+
+        if object_id and lifecycle_state and reconciliation == "MAPPED" and authority_state == "CURRENT":
             comparable.append(
                 {
                     "object_id": object_id,
@@ -129,6 +151,7 @@ def build_portfolio_coverage(source: dict[str, Any]) -> dict[str, Any]:
         "source": _source_meta(source),
         "comparable_initiatives": comparable,
         "non_comparable_row_count": non_comparable,
+        "excluded_non_initiative_row_count": excluded_non_initiative,
         "global_comparison_supported": global_supported,
         "ranking_basis": "CANONICAL_LIFECYCLE_PROGRESSION_ONLY",
         "limitations": limitations,
