@@ -1,0 +1,26 @@
+schema_version: 1
+suite_id: COM-CONFORMANCE-001
+name: ADUMUN Communication contract fixture suite
+standards:
+  STD-COM-001: 0.1.0-draft
+  STD-COM-REST-001: 0.1.0-draft
+mode: fixture
+scenarios:
+  - id: COM-SUCCESS-ENVELOPE-001
+    body_source: standards
+    body_file: communication/examples/success-response.json
+    schema_path: communication/schemas/response-envelope.schema.json
+    request_id_json_path: meta.requestId
+  - id: COM-ERROR-ENVELOPE-001
+    body_source: standards
+    body_file: communication/examples/error-response.json
+    schema_path: communication/schemas/error-envelope.schema.json
+    request_id_json_path: meta.requestId
+  - id: COM-READINESS-001
+    body_source: standards
+    body_file: communication/examples/readiness-response.json
+    schema_path: communication/schemas/health-readiness.schema.json
+notes:
+  - Fixture mode validates the normative examples directly from a Standards checkout.
+  - Live mode uses the same schemas when --base-url and scenario paths are supplied by a consumer-specific suite.
+  - Dependency-failure scenarios belong in consumer suites because inducing 502/503/504 behavior safely is implementation-specific.
